@@ -468,7 +468,7 @@ export async function NpcRoll({
   let bonus = 0;
 
   // Make sure our numbers are numbers
-  [diceRoll, diceKeep] = [diceRoll, diceKeep].map(e => +e);
+  [diceRoll, diceKeep] = [diceRoll, diceKeep].map(e => parseInt(e));
 
   // Should we show the options dialog?
   const settingsKeys = {
@@ -515,9 +515,9 @@ export async function NpcRoll({
 async function getNpcRollOptions(rollName, noVoid) {
   function _processNpcRollOptions(form) {
     return {
-      rollMod: +form.rollMod.value,
-      keepMod: +form.keepMod.value,
-      totalMod: +form.totalMod.value
+      rollMod: parseInt(form.rollMod.value),
+      keepMod: parseInt(form.keepMod.value),
+      totalMod: parseInt(form.totalMod.value)
     }
   }
 

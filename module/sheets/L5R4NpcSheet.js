@@ -79,7 +79,7 @@ export default class L5R4NpcSheet extends ActorSheet {
     // Suss out the roll type so we can apply the correct setting
     const rollType = rollTypeLabel?.split(" ")[0].toLocaleLowerCase();
 
-    await Dice.NpcRoll(
+    return await Dice.NpcRoll(
       {
         woundPenalty,
         diceRoll,
@@ -100,7 +100,7 @@ export default class L5R4NpcSheet extends ActorSheet {
     const toggleOptions = event.shiftKey;
     const rollType = "skill";
 
-    await Dice.NpcRoll(
+    return await Dice.NpcRoll(
       {
         woundPenalty,
         diceRoll,
@@ -121,7 +121,7 @@ export default class L5R4NpcSheet extends ActorSheet {
     const toggleOptions = event.shiftKey;
     const rollType = "skill";
 
-    await Dice.NpcRoll(
+    return await Dice.NpcRoll(
       {
         diceRoll,
         diceKeep,
