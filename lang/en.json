@@ -221,6 +221,10 @@
     "showSkillRollOptions": {
       "name": "Ask for Skill Rolls and Damage Roll options by default.",
       "label": "Hold Shift to Toggle."
+    },
+    "allowNpcVoidPoints": {
+      "name": "Display Void Point checkbox for NPC rolls.",
+      "label": "NPCs normally lack Void."
     }
   }
 }

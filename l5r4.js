@@ -63,6 +63,14 @@ function registerSystemSettings() {
     type: Boolean,
     default: true
   });
+  game.settings.register("l5r4", "allowNpcVoidPoints", {
+    config: true,
+    scope: "client",
+    name: "SETTINGS.allowNpcVoidPoints.name",
+    hint: "SETTINGS.allowNpcVoidPoints.label",
+    type: Boolean,
+    default: false
+  });
 }
 
 Hooks.once("init", function () {

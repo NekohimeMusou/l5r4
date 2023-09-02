@@ -5,10 +5,12 @@
     <input type="checkbox" name="woundPenalty" checked="checked" />
   </div>
   {{/unless}}
+  {{#unless noVoid}}
   <div class="form-group">
     <label>{{localize "l5r4.rings.void"}}?</label>
     <input type="checkbox" name="void" />
   </div>
+  {{/unless}}
   {{#if skill}}
   <div class="form-group">
     <label>{{localize "l5r4.mech.emphasis"}}?</label>

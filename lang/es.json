@@ -221,6 +221,10 @@
     "showSkillRollOptions": {
       "name": "Preguntar por defecto por Tiradas de Habilidad y opciones de Tiradas de Daño.",
       "label": "Mantener pulsada tecla Mayús para alternar."
+    },
+    "allowNpcVoidPoints": {
+      "name": "Mostrar la casilla de verificación Puntos de Vacío Gastados para las tiradas de NPC.",
+      "label": "Los PNJ normalmente carecen de Vacío."
     }
   }
 }
