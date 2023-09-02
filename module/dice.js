@@ -396,7 +396,10 @@ export async function WeaponRoll({
 
   let diceToRoll = parseInt(diceRoll) + parseInt(rollMod);
   let diceToKeep = parseInt(diceKeep) + parseInt(keepMod);
-  let rollFormula = `${diceToRoll}d10k${diceToKeep}x10+${totalMod}`;
+
+  // Apply Ten Dice Rule
+  ({diceRoll, diceKeep, bonus} = TenDiceRule(diceToRoll, diceToKeep, totalMod));
+  let rollFormula = `${rolled}d10k${kept}x10+${bonus}`;
 
   let rollResult = await new Roll(rollFormula).roll({ async: true });
   let renderedRoll = await rollResult.render();
