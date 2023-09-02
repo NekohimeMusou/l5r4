@@ -221,6 +221,10 @@
     "showSkillRollOptions": {
       "name": "Preguntar por defecto por Tiradas de Habilidad y opciones de Tiradas de Daño.",
       "label": "Mantener pulsada tecla Mayús para alternar."
+    },
+    "useLtTenDiceRule": {
+      "name": "Usa la Regla de los Diez Dados modificada de Little Truths.",
+      "label": "Si hay un número impar de dados lanzados en exceso y menos de 10 dados guardados, suma +2 al total de la tirada para que el dado \"extra\" dé un beneficio."
     }
   }
 }

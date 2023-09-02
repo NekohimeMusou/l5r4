@@ -221,6 +221,10 @@
     "showSkillRollOptions": {
       "name": "Ask for Skill Rolls and Damage Roll options by default.",
       "label": "Hold Shift to Toggle."
+    },
+    "useLtTenDiceRule": {
+      "name": "Use the modified Ten Dice Rule from Little Truths.",
+      "label": "If there are an odd number of excess rolled dice and fewer than 10 kept dice, add +2 to the roll total so the \"extra\" die gives a benefit."
     }
   }
 }

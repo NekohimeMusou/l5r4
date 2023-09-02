@@ -63,6 +63,14 @@ function registerSystemSettings() {
     type: Boolean,
     default: true
   });
+  game.settings.register("l5r4", "useLtTenDiceRule", {
+    config: true,
+    scope: "world",
+    name: "SETTINGS.useLtTenDiceRule.name",
+    hint: "SETTINGS.useLtTenDiceRule.label",
+    type: Boolean,
+    default: false
+  });
 }
 
 Hooks.once("init", function () {
