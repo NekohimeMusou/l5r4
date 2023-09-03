@@ -4,6 +4,7 @@ export async function SkillRoll({
   skillRank = null,
   skillName = null,
   askForOptions = true,
+  npc = false,
   skillTrait = null } = {}) {
   const messageTemplate = "systems/l5r4/templates/chat/simple-roll.hbs";
 
@@ -19,7 +20,8 @@ export async function SkillRoll({
   let applyWoundPenalty = true;
 
   if (askForOptions != optionsSettings) {
-    let checkOptions = await GetSkillOptions(skillName);
+    const noVoid = npc && !game.settings.get("l5r4", "allowNpcVoidPoints");
+    let checkOptions = await GetSkillOptions(skillName, noVoid);
     if (checkOptions.cancelled) {
       return;
     }
@@ -233,9 +235,9 @@ export async function TraitRoll({
   rollResult.toMessage(messageData);
 }
 
-async function GetSkillOptions(skillName) {
+async function GetSkillOptions(skillName, noVoid) {
   const template = "systems/l5r4/templates/chat/roll-modifiers-dialog.hbs"
-  const html = await renderTemplate(template, { skill: true });
+  const html = await renderTemplate(template, { skill: true, noVoid });
 
   return new Promise(resolve => {
     const data = {
@@ -266,7 +268,7 @@ function _processSkillRollOptions(form) {
     rollMod: form.rollMod.value,
     keepMod: form.keepMod.value,
     totalMod: form.totalMod.value,
-    void: form.void.checked
+    void: form.void?.checked ?? false
   }
 }
 
@@ -396,7 +398,6 @@ export async function WeaponRoll({
     }
   }
 
-
   let diceToRoll = parseInt(diceRoll) + parseInt(rollMod);
   let diceToKeep = parseInt(diceKeep) + parseInt(keepMod);
   let rollFormula = `${diceToRoll}d10k${diceToKeep}x10+${totalMod}`;
@@ -458,30 +459,94 @@ function _processWeaponRollOptions(form) {
   }
 }
 
-export function NpcRoll({
+export async function NpcRoll({
   woundPenalty = 0,
   diceRoll = null,
   diceKeep = null,
   rollName = null,
-  description = null } = {}) {
+  description = null,
+  toggleOptions = true,
+  rollType = null } = {}) {
   let label = `${rollName}`;
   let bonus = 0;
 
-  let totalMod = bonus - woundPenalty;
+  // Make sure our numbers are numbers
+  [diceRoll, diceKeep] = [diceRoll, diceKeep].map(e => parseInt(e));
 
-  ({ diceRoll, diceKeep, bonus } = TenDiceRule(diceRoll, diceKeep, totalMod));
-  let rollFormula = `${diceRoll}d10k${diceKeep}x10+${bonus}`;
+  // Should we show the options dialog?
+  const settingsKeys = {
+    trait: "showTraitRollOptions",
+    ring: "showSpellRollOptions",
+    skill: "showSkillRollOptions"
+  };
+
+  const settingsKey = settingsKeys[rollType];
+
+  const showOptions = game.settings.get("l5r4", settingsKey) ^ toggleOptions;
+
+  if (showOptions) {
+    const noVoid = !game.settings.get("l5r4", "allowNpcVoidPoints");
+    const { rollMod, keepMod, totalMod, applyWoundPenalty, cancelled } = await getNpcRollOptions(rollName, noVoid);
+
+    if (cancelled) return;
+
+    diceRoll += rollMod;
+    diceKeep += keepMod;
+    bonus += totalMod;
+
+    if (applyWoundPenalty) {
+      bonus -= woundPenalty;
+    }
+  }
+
+  ({ diceRoll, diceKeep, bonus } = TenDiceRule(diceRoll, diceKeep, bonus));
+
+  const rollFormula = `${diceRoll}d10k${diceKeep}x10+${bonus}`;
 
   if (description) {
     label += ` (${description})`
   }
 
-  let messageData = {
+  const messageData = {
     flavor: label,
     speaker: ChatMessage.getSpeaker()
   }
 
-  new Roll(rollFormula).roll({ async: false }).toMessage(messageData)
+  return await new Roll(rollFormula).roll({ async: true }).toMessage(messageData)
+}
+
+async function getNpcRollOptions(rollName, noVoid) {
+  function _processNpcRollOptions(form) {
+    return {
+      rollMod: parseInt(form.rollMod.value),
+      keepMod: parseInt(form.keepMod.value),
+      totalMod: parseInt(form.totalMod.value)
+    }
+  }
+
+  const template = "systems/l5r4/templates/chat/roll-modifiers-dialog.hbs";
+  const html = await renderTemplate(template, { noVoid });
+
+  return new Promise(resolve => {
+    const data = {
+      title: rollName,
+      content: html,
+      buttons: {
+        normal: {
+          label: game.i18n.localize("l5r4.mech.roll"),
+          callback: html => resolve(_processNpcRollOptions(html[0].querySelector("form")))
+        },
+        cancel: {
+          label: game.i18n.localize("l5r4.mech.cancel"),
+          callback: () => resolve({ cancelled: true })
+        }
+      },
+      default: "normal",
+      close: () => resolve({ cancelled: true })
+    };
+
+    new Dialog(data, null).render(true);
+  });
 }
 
 function TenDiceRule(diceRoll, diceKeep, bonus) {

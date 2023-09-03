@@ -222,6 +222,10 @@
       "name": "Demander les options des jets de Compétences et de Dégâts par défaut.",
       "label": "Appuyer sur MAJ pour inverser."
     },
+    "allowNpcVoidPoints": {
+      "name": "Afficher la case à cocher Points de Vide pour les lancers de PNJ.",
+      "label": "Les PNJ manquent normalement de Vide."
+    },
     "useLtTenDiceRule": {
       "name": "Utilise la Règle des Dix Dés modifiée de Little Truths.",
       "label": "S'il y a un nombre impair de dés lancés en excès et moins de 10 dés conservés, ajoute +2 au total du lancer pour que le dé «supplémentaire» donne un avantage."

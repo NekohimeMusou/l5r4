@@ -67,53 +67,68 @@ export default class L5R4NpcSheet extends ActorSheet {
     super.activateListeners(html);
   }
 
-  _onSimpleRoll(event) {
-    let diceRoll = event.currentTarget.dataset.roll;
-    let diceKeep = event.currentTarget.dataset.keep;
-    let rolltype = event.currentTarget.dataset.type;
-    let trait = event.currentTarget.dataset.trait;
-    let rollName = `${this.actor.name}: ${rolltype} ${trait}`;
+  async _onSimpleRoll(event) {
+    const woundPenalty = this.woundPenalty;
+    const diceRoll = event.currentTarget.dataset.roll;
+    const diceKeep = event.currentTarget.dataset.keep;
+    const rollTypeLabel = event.currentTarget.dataset.type;
+    const trait = event.currentTarget.dataset.trait;
+    const rollName = `${this.actor.name}: ${rollTypeLabel} ${trait}`;
+    const toggleOptions = event.shiftKey;
 
-    Dice.NpcRoll(
+    // Suss out the roll type so we can apply the correct setting
+    const rollType = rollTypeLabel?.split(" ")[0].toLocaleLowerCase();
+
+    return await Dice.NpcRoll(
       {
-        woundPenalty: this.woundPenalty,
-        diceRoll: diceRoll,
-        diceKeep: diceKeep,
-        rollName: rollName
+        woundPenalty,
+        diceRoll,
+        diceKeep,
+        rollName,
+        toggleOptions,
+        rollType
       }
     )
   }
 
-  _onAttackRoll(event) {
-    let diceRoll = event.currentTarget.dataset.roll;
-    let diceKeep = event.currentTarget.dataset.keep;
-    let rollName = `${this.actor.name}: ${game.i18n.localize("l5r4.mech.attackRoll")}`;
-    let description = event.currentTarget.dataset.desc;
+  async _onAttackRoll(event) {
+    const woundPenalty = this.woundPenalty;
+    const diceRoll = event.currentTarget.dataset.roll;
+    const diceKeep = event.currentTarget.dataset.keep;
+    const rollName = `${this.actor.name}: ${game.i18n.localize("l5r4.mech.attackRoll")}`;
+    const description = event.currentTarget.dataset.desc;
+    const toggleOptions = event.shiftKey;
+    const rollType = "skill";
 
-    Dice.NpcRoll(
+    return await Dice.NpcRoll(
       {
-        woundPenalty: this.woundPenalty,
-        diceRoll: diceRoll,
-        diceKeep: diceKeep,
-        rollName: rollName,
-        description: description
+        woundPenalty,
+        diceRoll,
+        diceKeep,
+        rollName,
+        description,
+        toggleOptions,
+        rollType
       }
     )
   }
 
-  _onDamageRoll(event) {
-    let diceRoll = event.currentTarget.dataset.roll;
-    let diceKeep = event.currentTarget.dataset.keep;
-    let rollName = `${this.actor.name}: ${game.i18n.localize("l5r4.mech.damageRoll")}`;
-    let description = event.currentTarget.dataset.desc;
+  async _onDamageRoll(event) {
+    const diceRoll = event.currentTarget.dataset.roll;
+    const diceKeep = event.currentTarget.dataset.keep;
+    const rollName = `${this.actor.name}: ${game.i18n.localize("l5r4.mech.damageRoll")}`;
+    const description = event.currentTarget.dataset.desc;
+    const toggleOptions = event.shiftKey;
+    const rollType = "skill";
 
-
-    Dice.NpcRoll(
+    return await Dice.NpcRoll(
       {
-        diceRoll: diceRoll,
-        diceKeep: diceKeep,
-        rollName: rollName,
-        description: description
+        diceRoll,
+        diceKeep,
+        rollName,
+        description,
+        toggleOptions,
+        rollType
       }
     )
   }
@@ -199,6 +214,7 @@ export default class L5R4NpcSheet extends ActorSheet {
       skillRank: skillRank,
       skillName: skillName,
       askForOptions: event.shiftKey,
+      npc: true,
       skillTrait
     });
   }
