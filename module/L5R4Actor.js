@@ -135,6 +135,7 @@ export default class L5R4Actor extends Actor {
   }
 
   _prepareNpcData(actorData, l5r4Data) {
+    if (actorData.type !== "npc") return;
     // calculate current "hp"
     l5r4Data.wounds.value = parseInt(l5r4Data.wounds.max) - parseInt(l5r4Data.suffered);
 
