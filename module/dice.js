@@ -3,12 +3,15 @@ export async function SkillRoll({
   actorTrait = null,
   skillRank = null,
   skillName = null,
-  askForOptions = true } = {}) {
+  askForOptions = true,
+  skillTrait = null } = {}) {
   const messageTemplate = "systems/l5r4/templates/chat/simple-roll.hbs";
+
+  const traitString = skillTrait === "void" ? "l5r4.rings.void" : `l5r4.traits.${skillTrait}`;
 
   let optionsSettings = game.settings.get("l5r4", "showSkillRollOptions");
   let rollType = game.i18n.localize("l5r4.mech.skillRoll");
-  let label = `${rollType}: ${skillName}`
+  let label = `${rollType}: ${skillName} / ${game.i18n.localize(traitString)}`;
   let emphasis = false;
   let rollMod = 0;
   let keepMod = 0;

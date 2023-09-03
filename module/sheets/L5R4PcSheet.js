@@ -213,7 +213,8 @@ export default class L5R4PcSheet extends ActorSheet {
       actorTrait: actorTrait,
       skillRank: skillRank,
       skillName: skillName,
-      askForOptions: event.shiftKey
+      askForOptions: event.shiftKey,
+      skillTrait
     });
   }
 
