@@ -485,6 +485,10 @@ export function NpcRoll({
 }
 
 function TenDiceRule(diceRoll, diceKeep, bonus) {
+  // Check for house rule before mutating any numbers
+  const LtHouseRule = game.settings.get("l5r4", "useLtTenDiceRule");
+  const addLtBonus = LtHouseRule && diceRoll > 10 && diceRoll % 2;
+
   let extras = 0;
   if (diceRoll > 10) {
     extras = diceRoll - 10;
@@ -507,6 +511,12 @@ function TenDiceRule(diceRoll, diceKeep, bonus) {
     } else {
       break;
     }
+  }
+
+  // LT house rule: If there's an odd number of excess rolled dice
+  // and fewer than 10 kept dice, add +2 to the total
+  if (addLtBonus && diceKeep < 10) {
+    bonus += 2;
   }
 
   if (diceKeep === 10 && diceRoll === 10) {
