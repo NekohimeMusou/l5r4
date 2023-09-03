@@ -373,7 +373,7 @@ export async function WeaponRoll({
 
   let rollMod = 0;
   let keepMod = 0;
-  let totalMod = 0;
+  let bonus = 0;
 
   if (askForOptions != optionsSettings) {
     let checkOptions = await GetWeaponOptions(weaponName);
@@ -384,7 +384,7 @@ export async function WeaponRoll({
 
     rollMod = parseInt(checkOptions.rollMod);
     keepMod = parseInt(checkOptions.keepMod);
-    totalMod = parseInt(checkOptions.totalMod);
+    bonus = parseInt(checkOptions.totalMod);
 
     if (checkOptions.void) {
       rollMod += 1;
@@ -398,8 +398,8 @@ export async function WeaponRoll({
   let diceToKeep = parseInt(diceKeep) + parseInt(keepMod);
 
   // Apply Ten Dice Rule
-  ({diceRoll, diceKeep, bonus} = TenDiceRule(diceToRoll, diceToKeep, totalMod));
-  let rollFormula = `${rolled}d10k${kept}x10+${bonus}`;
+  ({diceRoll, diceKeep, bonus} = TenDiceRule(diceToRoll, diceToKeep, bonus));
+  let rollFormula = `${diceRoll}d10k${diceKeep}x10+${bonus}`;
 
   let rollResult = await new Roll(rollFormula).roll({ async: true });
   let renderedRoll = await rollResult.render();
