@@ -2,7 +2,7 @@
 
 ![Banner](banner.webp)
 [![FoundryVTT version](https://img.shields.io/badge/FVTT-v11.x-informational)](https://foundryvtt.com/)
-![GitHub release (with filter)](https://img.shields.io/github/v/release/NekohimeMusou/l5r4)
+![GitHub release (with filter)](https://img.shields.io/github/v/release/NekohimeMusou/l5r4?link=https%3A%2F%2Fgithub.com%2FNekohimeMusou%2Fl5r4%2Freleases)
 ![GitLab contributors](https://img.shields.io/gitlab/contributors/43350653?logo=GitLab)
 
 TODO: Fix other badges
