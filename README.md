@@ -2,8 +2,8 @@
 
 ![Banner](banner.webp)
 [![FoundryVTT version](https://img.shields.io/badge/FVTT-v11.x-informational)](https://foundryvtt.com/)
-[![Release](https://img.shields.io/gitlab/v/tag/43350653?label=Latest%20Release)]()
-[![GitLab contributors](https://img.shields.io/gitlab/contributors/43350653?logo=GitLab)]()
+![GitHub release (with filter)](https://img.shields.io/github/v/release/NekohimeMusou/l5r4)
+![GitLab contributors](https://img.shields.io/gitlab/contributors/43350653?logo=GitLab)
 
 TODO: Fix other badges
 
@@ -14,7 +14,7 @@ Unofficial implementation of the Legend of the Five Rings 4th edition for Foundr
 - Trait rolls, ring rolls, spellcasting rolls, skill rolls and damage rolls from the character sheet.
 - Enforces the "Ten dice rule" for rolls from the character sheet.
 - Automatically calculates derived attributes such as initiative, Armor TN and rings.
-- Automatically calculates the current would level based on the wounds suffered.
+- Automatically calculates the current wound level based on the wounds suffered.
 - A simplified sheet for npcs with rollable attacks, skills and damage.
 
 ## Available languages
@@ -25,9 +25,9 @@ Unofficial implementation of the Legend of the Five Rings 4th edition for Foundr
 
 ## Installation
 
-The recommended installation method is with the usual FoundryVTT installer (see the foundry [tutorial](https://foundryvtt.com/article/tutorial/)). ~~This system is listed as <https://foundryvtt.com/packages/l5r4>.~~
+~~The recommended installation method is with the usual FoundryVTT installer (see the foundry [tutorial](https://foundryvtt.com/article/tutorial/)). This system is listed as <https://foundryvtt.com/packages/l5r4>.~~
 
-Manifest: <https://gitlab.com/team-l5r4/l5r4/-/raw/master/system.json>
+Manifest: <https://raw.githubusercontent.com/NekohimeMusou/l5r4/master/system.json>
 
 Alternatively you can download this repo into your foundry data: `your_foundry_data_path/systems/`
 
