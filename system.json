@@ -1,18 +1,22 @@
 {
   "id": "l5r4",
-  "title": "Legend of the Five Rings 4th Edition",
+  "title": "Legend of the Five Rings 4th Edition - Nekohime Fork",
   "description": "System to play L5R 4th edition",
   "authors": [
     {
       "name": "Mateo Caycedo Alvarez",
       "url": "https://gitlab.com/teo-cay/"
+    },
+    {
+      "name": "Nekohime Musou",
+      "url": "https://github.com/NekohimeMusou",
+      "discord": "nekohime.musou"
     }
   ],
-  "version": "0.7.9",
+  "version": "0.7.10",
   "compatibility": {
     "minimum": 10,
-    "verified": 10,
-    "maximum": 11
+    "verified": 11
   },
   "esmodules": [
     "l5r4.js"
@@ -41,8 +45,8 @@
   ],
   "gridDistance": 5,
   "gridUnits": "ft",
-  "url": "https://gitlab.com/team-l5r4/l5r4",
-  "manifest": "https://gitlab.com/team-l5r4/l5r4/-/raw/master/system.json",
-  "download": "https://gitlab.com/team-l5r4/l5r4/-/archive/0.7.9/l5r4-0.7.9.zip",
+  "url": "https://github.com/NekohimeMusou/l5r4",
+  "manifest": "https://raw.githubusercontent.com/NekohimeMusou/l5r4/master/system.json",
+  "download": "https://github.com/NekohimeMusou/l5r4/releases/download/v0.7.10/l5r4-v0.7.10.zip",
   "license": "GPL v3"
 }

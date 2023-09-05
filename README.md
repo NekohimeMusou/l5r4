@@ -1,8 +1,11 @@
-# Unofficial L5R 4th Edition System for Foundry VTT 
+# Unofficial L5R 4th Edition System for Foundry VTT
+
 ![Banner](banner.webp)
-[![FoundryVTT version](https://img.shields.io/badge/FVTT-v10.x-informational)](https://foundryvtt.com/)
+[![FoundryVTT version](https://img.shields.io/badge/FVTT-v11.x-informational)](https://foundryvtt.com/)
 [![Release](https://img.shields.io/gitlab/v/tag/43350653?label=Latest%20Release)]()
 [![GitLab contributors](https://img.shields.io/gitlab/contributors/43350653?logo=GitLab)]()
+
+TODO: Fix other badges
 
 Unofficial implementation of the Legend of the Five Rings 4th edition for Foundry VTT. Provides character sheets for pcs and npcs.
 
@@ -18,23 +21,23 @@ Unofficial implementation of the Legend of the Five Rings 4th edition for Foundr
 
 - English
 - Español
-- Français 
+- Français
 
 ## Installation
 
-The recommended installation method is with the usual FoundryVTT installer (see the foundry [tutorial](https://foundryvtt.com/article/tutorial/)). This system is listed as https://foundryvtt.com/packages/l5r4.
+The recommended installation method is with the usual FoundryVTT installer (see the foundry [tutorial](https://foundryvtt.com/article/tutorial/)). ~~This system is listed as <https://foundryvtt.com/packages/l5r4>.~~
 
-Manifest: https://gitlab.com/team-l5r4/l5r4/-/raw/master/system.json
+Manifest: <https://gitlab.com/team-l5r4/l5r4/-/raw/master/system.json>
 
 Alternatively you can download this repo into your foundry data: `your_foundry_data_path/systems/`
 
 ## Recomended modules
 
 The L5R4ed dice rolles allows for rolls directly into the chat for quick rolls that are not covered by the system
-https://github.com/eupolemo/fvtt-l5r4ed-dice-roller
+<https://github.com/eupolemo/fvtt-l5r4ed-dice-roller>
 
 Compatible with Dice So Nice!
-https://gitlab.com/riccisi/foundryvtt-dice-so-nice
+<https://gitlab.com/riccisi/foundryvtt-dice-so-nice>
 
 ## Special thanks to contributors
 
