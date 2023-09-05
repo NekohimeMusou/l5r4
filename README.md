@@ -2,12 +2,12 @@
 
 ![Banner](banner.webp)
 [![FoundryVTT version](https://img.shields.io/badge/FVTT-v11.x-informational)](https://foundryvtt.com/)
-![GitHub release (with filter)](https://img.shields.io/github/v/release/NekohimeMusou/l5r4?link=https%3A%2F%2Fgithub.com%2FNekohimeMusou%2Fl5r4%2Freleases)
-![GitLab contributors](https://img.shields.io/gitlab/contributors/43350653?logo=GitLab)
-
-TODO: Fix other badges
+[![GitHub release (with filter)](https://img.shields.io/github/v/release/NekohimeMusou/l5r4)](<https://github.com/NekohimeMusou/l5r4/releases>)
+![GitHub contributors](https://img.shields.io/github/contributors/NekohimeMusou/l5r4?logo=git)
 
 Unofficial implementation of the Legend of the Five Rings 4th edition for Foundry VTT. Provides character sheets for pcs and npcs.
+
+Forked from <https://gitlab.com/team-l5r4/l5r4>.
 
 ### Features
 
