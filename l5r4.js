@@ -1,4 +1,4 @@
-import { l5r4 } from "./module/config.js";
+import {l5r4} from "./module/config.js";
 import L5R4Actor from "./module/L5R4Actor.js";
 import L5R4Item from "./module/L5R4Item.js";
 import L5R4ItemSheet from "./module/sheets/L5R4ItemSheet.js";
@@ -32,11 +32,11 @@ async function preloadHandlebarsTemplates() {
     "systems/l5r4/templates/partials/npc-rings.hbs",
     "systems/l5r4/templates/chat/simple-roll.hbs",
     "systems/l5r4/templates/chat/weapon-chat.hbs",
-    "templates/dice/roll.html"
+    "templates/dice/roll.html",
   ];
 
   return loadTemplates(templatePaths);
-};
+}
 
 function registerSystemSettings() {
   game.settings.register("l5r4", "showTraitRollOptions", {
@@ -45,7 +45,7 @@ function registerSystemSettings() {
     name: "SETTINGS.showTraitRollOptions.name",
     hint: "SETTINGS.showTraitRollOptions.label",
     type: Boolean,
-    default: true
+    default: true,
   });
   game.settings.register("l5r4", "showSpellRollOptions", {
     config: true,
@@ -53,7 +53,7 @@ function registerSystemSettings() {
     name: "SETTINGS.showSpellRollOptions.name",
     hint: "SETTINGS.showSpellRollOptions.label",
     type: Boolean,
-    default: true
+    default: true,
   });
   game.settings.register("l5r4", "showSkillRollOptions", {
     config: true,
@@ -61,7 +61,7 @@ function registerSystemSettings() {
     name: "SETTINGS.showSkillRollOptions.name",
     hint: "SETTINGS.showSkillRollOptions.label",
     type: Boolean,
-    default: true
+    default: true,
   });
   game.settings.register("l5r4", "allowNpcVoidPoints", {
     config: true,
@@ -69,7 +69,7 @@ function registerSystemSettings() {
     name: "SETTINGS.allowNpcVoidPoints.name",
     hint: "SETTINGS.allowNpcVoidPoints.label",
     type: Boolean,
-    default: false
+    default: false,
   });
   game.settings.register("l5r4", "useLtTenDiceRule", {
     config: true,
@@ -77,11 +77,11 @@ function registerSystemSettings() {
     name: "SETTINGS.useLtTenDiceRule.name",
     hint: "SETTINGS.useLtTenDiceRule.label",
     type: Boolean,
-    default: false
+    default: false,
   });
 }
 
-Hooks.once("init", function () {
+Hooks.once("init", function() {
   console.log("l5r4 | Initialising Legend of Five rings 4th ed system");
 
   CONFIG.l5r4 = l5r4;
@@ -99,21 +99,21 @@ Hooks.once("init", function () {
     const initMod = actor.system.initiative.total_mod;
 
     return `${initRoll}d10k${initKeep}x10+${initMod}`;
-  }
+  };
 
   Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("l5r4", L5R4ItemSheet, { makeDefault: true });
+  Items.registerSheet("l5r4", L5R4ItemSheet, {makeDefault: true});
 
 
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("l5r4", L5R4IPcSheet, { types: ["pc"], makeDefault: true });
-  Actors.registerSheet("l5r4", L5R4INpcSheet, { types: ["npc"], makeDefault: true });
+  Actors.registerSheet("l5r4", L5R4IPcSheet, {types: ["pc"], makeDefault: true});
+  Actors.registerSheet("l5r4", L5R4INpcSheet, {types: ["npc"], makeDefault: true});
 
   preloadHandlebarsTemplates();
 
   registerSystemSettings();
 
-  Handlebars.registerHelper("times", function (n, content) {
+  Handlebars.registerHelper("times", function(n, content) {
     let result = "";
     for (let i = 0; i < n; ++i) {
       content.data.index = i + 1;
@@ -124,7 +124,7 @@ Hooks.once("init", function () {
   });
 
 
-  Handlebars.registerHelper("math", function (lvalue, operator, rvalue, options) {
+  Handlebars.registerHelper("math", function(lvalue, operator, rvalue, options) {
     lvalue = parseFloat(lvalue);
     rvalue = parseFloat(rvalue);
 
@@ -133,19 +133,17 @@ Hooks.once("init", function () {
       "-": lvalue - rvalue,
       "*": lvalue * rvalue,
       "/": lvalue / rvalue,
-      "%": lvalue % rvalue
+      "%": lvalue % rvalue,
     }[operator];
   });
 
-  Handlebars.registerHelper('concat', function () {
-    var outStr = '';
-    for (var arg in arguments) {
-      if (typeof arguments[arg] != 'object') {
-        outStr += arguments[arg];
+  Handlebars.registerHelper("concat", function(...args) {
+    let outStr = "";
+    for (const arg of args) {
+      if (typeof arg != "object") {
+        outStr += arg;
       }
     }
     return outStr;
   });
-
 });
-

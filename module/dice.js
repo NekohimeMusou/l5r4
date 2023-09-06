@@ -1,17 +1,17 @@
-export async function SkillRoll({
+export async function skillRoll({
   woundPenalty = 0,
   actorTrait = null,
   skillRank = null,
   skillName = null,
   askForOptions = true,
   npc = false,
-  skillTrait = null } = {}) {
+  skillTrait = null} = {}) {
   const messageTemplate = "systems/l5r4/templates/chat/simple-roll.hbs";
 
   const traitString = skillTrait === "void" ? "l5r4.rings.void" : `l5r4.traits.${skillTrait}`;
 
-  let optionsSettings = game.settings.get("l5r4", "showSkillRollOptions");
-  let rollType = game.i18n.localize("l5r4.mech.skillRoll");
+  const optionsSettings = game.settings.get("l5r4", "showSkillRollOptions");
+  const rollType = game.i18n.localize("l5r4.mech.skillRoll");
   let label = `${rollType}: ${skillName} / ${game.i18n.localize(traitString)}`;
   let emphasis = false;
   let rollMod = 0;
@@ -21,13 +21,13 @@ export async function SkillRoll({
 
   if (askForOptions != optionsSettings) {
     const noVoid = npc && !game.settings.get("l5r4", "allowNpcVoidPoints");
-    let checkOptions = await GetSkillOptions(skillName, noVoid);
+    const checkOptions = await getSkillOptions(skillName, noVoid);
     if (checkOptions.cancelled) {
       return;
     }
 
     emphasis = checkOptions.emphasis;
-    applyWoundPenalty = checkOptions.applyWoundPenalty
+    applyWoundPenalty = checkOptions.applyWoundPenalty;
     rollMod = parseInt(checkOptions.rollMod);
     keepMod = parseInt(checkOptions.keepMod);
     totalMod = parseInt(checkOptions.totalMod);
@@ -43,41 +43,40 @@ export async function SkillRoll({
     totalMod = totalMod - woundPenalty;
   }
 
-  let diceToRoll = parseInt(actorTrait) + parseInt(skillRank) + parseInt(rollMod);
-  let diceToKeep = parseInt(actorTrait) + parseInt(keepMod);
-  let { diceRoll, diceKeep, bonus } = TenDiceRule(diceToRoll, diceToKeep, totalMod);
+  const diceToRoll = parseInt(actorTrait) + parseInt(skillRank) + parseInt(rollMod);
+  const diceToKeep = parseInt(actorTrait) + parseInt(keepMod);
+  const {diceRoll, diceKeep, bonus} = tenDiceRule(diceToRoll, diceToKeep, totalMod);
   let rollFormula = `${diceRoll}d10k${diceKeep}x10+${bonus}`;
 
   if (emphasis) {
     label += ` (${game.i18n.localize("l5r4.mech.emphasis")})`;
     rollFormula = `${diceRoll}d10r1k${diceKeep}x10+${bonus}`;
   }
-  let rollResult = await new Roll(rollFormula).roll({ async: true });
+  const rollResult = await new Roll(rollFormula).roll({async: true});
 
-  let renderedRoll = await rollResult.render({
+  const renderedRoll = await rollResult.render({
     template: messageTemplate,
-    flavor: label
+    flavor: label,
   });
 
-  let messageData = {
+  const messageData = {
     speaker: ChatMessage.getSpeaker(),
-    content: renderedRoll
-  }
+    content: renderedRoll,
+  };
   rollResult.toMessage(messageData);
-
 }
 
-export async function RingRoll({
+export async function ringRoll({
   woundPenalty = 0,
   ringRank = null,
   ringName = null,
   systemRing = null,
   schoolRank = null,
-  askForOptions = true } = {}) {
+  askForOptions = true} = {}) {
   const messageTemplate = "systems/l5r4/templates/chat/simple-roll.hbs";
   let rollType = game.i18n.localize("l5r4.mech.ringRoll");
   let label = `${rollType}: ${ringName}`;
-  let optionsSettings = game.settings.get("l5r4", "showSpellRollOptions");
+  const optionsSettings = game.settings.get("l5r4", "showSpellRollOptions");
   let affinity = false;
   let deficiency = false;
   let normalRoll = true;
@@ -90,13 +89,13 @@ export async function RingRoll({
   let voidSlot = false;
 
   if (askForOptions != optionsSettings) {
-    let checkOptions = await GetSpellOptions(ringName);
+    const checkOptions = await getSpellOptions(ringName);
 
     if (checkOptions.cancelled) {
       return false;
     }
 
-    applyWoundPenalty = checkOptions.applyWoundPenalty
+    applyWoundPenalty = checkOptions.applyWoundPenalty;
     affinity = checkOptions.affinity;
     deficiency = checkOptions.deficiency;
     normalRoll = checkOptions.normalRoll;
@@ -110,7 +109,7 @@ export async function RingRoll({
     if (voidRoll) {
       rollMod += 1;
       keepMod += 1;
-      label += ` ${game.i18n.localize("l5r4.rings.void")}!`
+      label += ` ${game.i18n.localize("l5r4.rings.void")}!`;
     }
   }
 
@@ -119,27 +118,27 @@ export async function RingRoll({
   }
 
   if (normalRoll) {
-    let diceToRoll = parseInt(ringRank) + parseInt(rollMod);
-    let diceToKeep = parseInt(ringRank) + parseInt(keepMod);
-    let { diceRoll, diceKeep, bonus } = TenDiceRule(diceToRoll, diceToKeep, totalMod);
-    let rollFormula = `${diceRoll}d10k${diceKeep}x10+${bonus}`;
-    let rollResult = await new Roll(rollFormula).roll({ async: true });
+    const diceToRoll = parseInt(ringRank) + parseInt(rollMod);
+    const diceToKeep = parseInt(ringRank) + parseInt(keepMod);
+    const {diceRoll, diceKeep, bonus} = tenDiceRule(diceToRoll, diceToKeep, totalMod);
+    const rollFormula = `${diceRoll}d10k${diceKeep}x10+${bonus}`;
+    const rollResult = await new Roll(rollFormula).roll({async: true});
 
-    let renderedRoll = await rollResult.render({
+    const renderedRoll = await rollResult.render({
       template: messageTemplate,
-      flavor: label
+      flavor: label,
     });
 
-    let messageData = {
+    const messageData = {
       speaker: ChatMessage.getSpeaker(),
-      content: renderedRoll
-    }
+      content: renderedRoll,
+    };
     rollResult.toMessage(messageData);
   } else {
     rollType = game.i18n.localize("l5r4.mech.spellCasting");
-    label = `${rollType}: ${ringName}`
+    label = `${rollType}: ${ringName}`;
     if (voidRoll) {
-      label += ` ${game.i18n.localize("l5r4.rings.void")}!`
+      label += ` ${game.i18n.localize("l5r4.rings.void")}!`;
     }
     if (affinity) {
       schoolRank += 1;
@@ -150,38 +149,38 @@ export async function RingRoll({
     if (schoolRank <= 0) {
       return ui.notifications.error(game.i18n.localize("l5r4.errors.scoolRankZero"));
     }
-    let diceToRoll = parseInt(ringRank) + parseInt(schoolRank) + parseInt(rollMod);
-    let diceToKeep = parseInt(ringRank) + parseInt(keepMod);
-    let { diceRoll, diceKeep, bonus } = TenDiceRule(diceToRoll, diceToKeep, totalMod);
-    let rollFormula = `${diceRoll}d10k${diceKeep}x10+${bonus}`;
-    let rollResult = await new Roll(rollFormula).roll({ async: true });
+    const diceToRoll = parseInt(ringRank) + parseInt(schoolRank) + parseInt(rollMod);
+    const diceToKeep = parseInt(ringRank) + parseInt(keepMod);
+    const {diceRoll, diceKeep, bonus} = tenDiceRule(diceToRoll, diceToKeep, totalMod);
+    const rollFormula = `${diceRoll}d10k${diceKeep}x10+${bonus}`;
+    const rollResult = await new Roll(rollFormula).roll({async: true});
 
-    let renderedRoll = await rollResult.render({
+    const renderedRoll = await rollResult.render({
       template: messageTemplate,
-      flavor: label
+      flavor: label,
     });
 
-    let messageData = {
+    const messageData = {
       speaker: ChatMessage.getSpeaker(),
-      content: renderedRoll
-    }
+      content: renderedRoll,
+    };
     rollResult.toMessage(messageData);
     return {spellSlot: spellSlot, voidSlot: voidSlot, systemRing: systemRing, ringName: ringName};
   }
   return false;
 }
 
-export async function TraitRoll({
+export async function traitRoll({
   woundPenalty = 0,
   traitRank = null,
   traitName = null,
   askForOptions = true,
-  unskilled = false } = {}) {
+  unskilled = false} = {}) {
   const messageTemplate = "systems/l5r4/templates/chat/simple-roll.hbs";
-  let rollType = game.i18n.localize("l5r4.mech.traitRoll");
-  let label = `${rollType}: ${traitName}`
+  const rollType = game.i18n.localize("l5r4.mech.traitRoll");
+  let label = `${rollType}: ${traitName}`;
 
-  let optionsSettings = game.settings.get("l5r4", "showTraitRollOptions");
+  const optionsSettings = game.settings.get("l5r4", "showTraitRollOptions");
 
   let rollMod = 0;
   let keepMod = 0;
@@ -189,7 +188,7 @@ export async function TraitRoll({
   let applyWoundPenalty = true;
 
   if (askForOptions != optionsSettings) {
-    let checkOptions = await GetTraitRollOptions(traitName);
+    const checkOptions = await getTraitRollOptions(traitName);
 
     if (checkOptions.cancelled) {
       return;
@@ -204,57 +203,57 @@ export async function TraitRoll({
     if (checkOptions.void) {
       rollMod += 1;
       keepMod += 1;
-      label += ` ${game.i18n.localize("l5r4.rings.void")}!`
+      label += ` ${game.i18n.localize("l5r4.rings.void")}!`;
     }
   }
   if (applyWoundPenalty) {
     totalMod = totalMod - woundPenalty;
   }
 
-  let diceToRoll = parseInt(traitRank) + parseInt(rollMod);
-  let diceToKeep = parseInt(traitRank) + parseInt(keepMod);
-  let { diceRoll, diceKeep, bonus } = TenDiceRule(diceToRoll, diceToKeep, totalMod);
+  const diceToRoll = parseInt(traitRank) + parseInt(rollMod);
+  const diceToKeep = parseInt(traitRank) + parseInt(keepMod);
+  const {diceRoll, diceKeep, bonus} = tenDiceRule(diceToRoll, diceToKeep, totalMod);
   let rollFormula = `${diceRoll}d10k${diceKeep}x10+${bonus}`;
-  let rollResult = await new Roll(rollFormula).roll({ async: true });
+  let rollResult = await new Roll(rollFormula).roll({async: true});
   if (unskilled) {
     rollFormula = `${diceRoll}d10k${diceKeep}`;
-    rollResult = await new Roll(rollFormula).roll({ async: true });
-    label += ` (${game.i18n.localize("l5r4.mech.unskilledRoll")})`
+    rollResult = await new Roll(rollFormula).roll({async: true});
+    label += ` (${game.i18n.localize("l5r4.mech.unskilledRoll")})`;
   }
 
-  let renderedRoll = await rollResult.render({
+  const renderedRoll = await rollResult.render({
     template: messageTemplate,
-    flavor: label
+    flavor: label,
   });
 
-  let messageData = {
+  const messageData = {
     speaker: ChatMessage.getSpeaker(),
-    content: renderedRoll
-  }
+    content: renderedRoll,
+  };
 
   rollResult.toMessage(messageData);
 }
 
-async function GetSkillOptions(skillName, noVoid) {
-  const template = "systems/l5r4/templates/chat/roll-modifiers-dialog.hbs"
-  const html = await renderTemplate(template, { skill: true, noVoid });
+async function getSkillOptions(skillName, noVoid) {
+  const template = "systems/l5r4/templates/chat/roll-modifiers-dialog.hbs";
+  const content = await renderTemplate(template, {skill: true, noVoid});
 
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const data = {
-      title: game.i18n.format("l5r4.chat.skillRoll", { skill: skillName }),
-      content: html,
+      title: game.i18n.format("l5r4.chat.skillRoll", {skill: skillName}),
+      content,
       buttons: {
         normal: {
           label: game.i18n.localize("l5r4.mech.roll"),
-          callback: html => resolve(_processSkillRollOptions(html[0].querySelector("form")))
+          callback: (html) => resolve(_processSkillRollOptions(html[0].querySelector("form"))),
         },
         cancel: {
           label: game.i18n.localize("l5r4.mech.cancel"),
-          callback: () => resolve({ cancelled: true })
-        }
+          callback: () => resolve({cancelled: true}),
+        },
       },
       default: "normal",
-      close: () => resolve({ cancelled: true })
+      close: () => resolve({cancelled: true}),
     };
 
     new Dialog(data, null).render(true);
@@ -268,30 +267,30 @@ function _processSkillRollOptions(form) {
     rollMod: form.rollMod.value,
     keepMod: form.keepMod.value,
     totalMod: form.totalMod.value,
-    void: form.void?.checked ?? false
-  }
+    void: form.void?.checked ?? false,
+  };
 }
 
-async function GetTraitRollOptions(traitName) {
-  const template = "systems/l5r4/templates/chat/roll-modifiers-dialog.hbs"
-  const html = await renderTemplate(template, { trait: true });
+async function getTraitRollOptions(traitName) {
+  const template = "systems/l5r4/templates/chat/roll-modifiers-dialog.hbs";
+  const content = await renderTemplate(template, {trait: true});
 
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const data = {
-      title: game.i18n.format("l5r4.chat.traitRoll", { trait: traitName }),
-      content: html,
+      title: game.i18n.format("l5r4.chat.traitRoll", {trait: traitName}),
+      content,
       buttons: {
         normal: {
           label: game.i18n.localize("l5r4.mech.roll"),
-          callback: html => resolve(_processTraitRollOptions(html[0].querySelector("form")))
+          callback: (html) => resolve(_processTraitRollOptions(html[0].querySelector("form"))),
         },
         cancel: {
           label: game.i18n.localize("l5r4.mech.cancel"),
-          callback: () => resolve({ cancelled: true })
-        }
+          callback: () => resolve({cancelled: true}),
+        },
       },
       default: "normal",
-      close: () => resolve({ cancelled: true })
+      close: () => resolve({cancelled: true}),
     };
 
     new Dialog(data, null).render(true);
@@ -305,34 +304,34 @@ function _processTraitRollOptions(form) {
     rollMod: form.rollMod.value,
     keepMod: form.keepMod.value,
     totalMod: form.totalMod.value,
-    void: form.void.checked
-  }
+    void: form.void.checked,
+  };
 }
 
-async function GetSpellOptions(ringName) {
-  const template = "systems/l5r4/templates/chat/roll-modifiers-dialog.hbs"
-  const html = await renderTemplate(template, { spell: true, ring: ringName });
+async function getSpellOptions(ringName) {
+  const template = "systems/l5r4/templates/chat/roll-modifiers-dialog.hbs";
+  const content = await renderTemplate(template, {spell: true, ring: ringName});
 
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const data = {
-      title: game.i18n.format("l5r4.chat.ringRoll", { ring: ringName }),
-      content: html,
+      title: game.i18n.format("l5r4.chat.ringRoll", {ring: ringName}),
+      content,
       buttons: {
         normalRoll: {
           label: game.i18n.localize("l5r4.mech.ringRoll"),
-          callback: html => resolve(_processRingRollOptions(html[0].querySelector("form")))
+          callback: (html) => resolve(_processRingRollOptions(html[0].querySelector("form"))),
         },
         spell: {
           label: game.i18n.localize("l5r4.mech.spellCasting"),
-          callback: html => resolve(_processSpellRollOptions(html[0].querySelector("form")))
+          callback: (html) => resolve(_processSpellRollOptions(html[0].querySelector("form"))),
         },
         cancel: {
           label: game.i18n.localize("l5r4.mech.cancel"),
-          callback: () => resolve({ cancelled: true })
-        }
+          callback: () => resolve({cancelled: true}),
+        },
       },
       default: "normal",
-      close: () => resolve({ cancelled: true })
+      close: () => resolve({cancelled: true}),
     };
 
     new Dialog(data, null).render(true);
@@ -349,8 +348,8 @@ function _processSpellRollOptions(form) {
     totalMod: form.totalMod.value,
     void: form.void.checked,
     spellSlot: form.spellSlot.checked,
-    voidSlot: form.voidSlot.checked
-  }
+    voidSlot: form.voidSlot.checked,
+  };
 }
 
 function _processRingRollOptions(form) {
@@ -360,28 +359,28 @@ function _processRingRollOptions(form) {
     keepMod: form.keepMod.value,
     totalMod: form.totalMod.value,
     void: form.void.checked,
-    normalRoll: true
-  }
+    normalRoll: true,
+  };
 }
 
-export async function WeaponRoll({
+export async function weaponRoll({
   diceRoll = null,
   diceKeep = null,
   weaponName = null,
   description = null,
-  askForOptions = true } = {}) {
+  askForOptions = true} = {}) {
   const messageTemplate = "systems/l5r4/templates/chat/weapon-chat.hbs";
 
-  let optionsSettings = game.settings.get("l5r4", "showSkillRollOptions");
-  let rollType = game.i18n.localize("l5r4.mech.damageRoll");
-  let label = `${rollType}: ${weaponName}`
+  const optionsSettings = game.settings.get("l5r4", "showSkillRollOptions");
+  const rollType = game.i18n.localize("l5r4.mech.damageRoll");
+  let label = `${rollType}: ${weaponName}`;
 
   let rollMod = 0;
   let keepMod = 0;
   let bonus = 0;
 
   if (askForOptions != optionsSettings) {
-    let checkOptions = await GetWeaponOptions(weaponName);
+    const checkOptions = await getWeaponOptions(weaponName);
 
     if (checkOptions.cancelled) {
       return;
@@ -394,59 +393,59 @@ export async function WeaponRoll({
     if (checkOptions.void) {
       rollMod += 1;
       keepMod += 1;
-      label += ` ${game.i18n.localize("l5r4.rings.void")}!`
+      label += ` ${game.i18n.localize("l5r4.rings.void")}!`;
     }
   }
 
-  let diceToRoll = parseInt(diceRoll) + parseInt(rollMod);
-  let diceToKeep = parseInt(diceKeep) + parseInt(keepMod);
+  const diceToRoll = parseInt(diceRoll) + parseInt(rollMod);
+  const diceToKeep = parseInt(diceKeep) + parseInt(keepMod);
 
   // Apply Ten Dice Rule
-  ({diceRoll, diceKeep, bonus} = TenDiceRule(diceToRoll, diceToKeep, bonus));
-  let rollFormula = `${diceRoll}d10k${diceKeep}x10+${bonus}`;
+  ({diceRoll, diceKeep, bonus} = tenDiceRule(diceToRoll, diceToKeep, bonus));
+  const rollFormula = `${diceRoll}d10k${diceKeep}x10+${bonus}`;
 
-  let rollResult = await new Roll(rollFormula).roll({ async: true });
-  let renderedRoll = await rollResult.render();
+  const rollResult = await new Roll(rollFormula).roll({async: true});
+  const renderedRoll = await rollResult.render();
 
-  let templateContext = {
+  const templateContext = {
     flavor: label,
     weapon: weaponName,
     description: description,
-    roll: renderedRoll
-  }
+    roll: renderedRoll,
+  };
 
-  let chatData = {
+  const chatData = {
     user: game.user.id,
     speaker: ChatMessage.getSpeaker(),
     roll: rollResult,
     content: await renderTemplate(messageTemplate, templateContext),
     sound: CONFIG.sounds.dice,
-    type: CONST.CHAT_MESSAGE_TYPES.ROLL
-  }
+    type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+  };
 
   ChatMessage.create(chatData);
 }
 
-async function GetWeaponOptions(weaponName) {
-  const template = "systems/l5r4/templates/chat/roll-modifiers-dialog.hbs"
-  const html = await renderTemplate(template, { weapon: true });
+async function getWeaponOptions(weaponName) {
+  const template = "systems/l5r4/templates/chat/roll-modifiers-dialog.hbs";
+  const content = await renderTemplate(template, {weapon: true});
 
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const data = {
-      title: game.i18n.format("l5r4.chat.damageRoll", { weapon: weaponName }),
-      content: html,
+      title: game.i18n.format("l5r4.chat.damageRoll", {weapon: weaponName}),
+      content,
       buttons: {
         normal: {
           label: game.i18n.localize("l5r4.mech.roll"),
-          callback: html => resolve(_processWeaponRollOptions(html[0].querySelector("form")))
+          callback: (html) => resolve(_processWeaponRollOptions(html[0].querySelector("form"))),
         },
         cancel: {
           label: game.i18n.localize("l5r4.mech.cancel"),
-          callback: () => resolve({ cancelled: true })
-        }
+          callback: () => resolve({cancelled: true}),
+        },
       },
       default: "normal",
-      close: () => resolve({ cancelled: true })
+      close: () => resolve({cancelled: true}),
     };
 
     new Dialog(data, null).render(true);
@@ -458,29 +457,29 @@ function _processWeaponRollOptions(form) {
     rollMod: form.rollMod.value,
     keepMod: form.keepMod.value,
     totalMod: form.totalMod.value,
-    void: form.void.checked
-  }
+    void: form.void.checked,
+  };
 }
 
-export async function NpcRoll({
+export async function npcRoll({
   woundPenalty = 0,
   diceRoll = null,
   diceKeep = null,
   rollName = null,
   description = null,
   toggleOptions = true,
-  rollType = null } = {}) {
+  rollType = null} = {}) {
   let label = `${rollName}`;
   let bonus = 0;
 
   // Make sure our numbers are numbers
-  [diceRoll, diceKeep] = [diceRoll, diceKeep].map(e => parseInt(e));
+  [diceRoll, diceKeep] = [diceRoll, diceKeep].map((e) => parseInt(e));
 
   // Should we show the options dialog?
   const settingsKeys = {
     trait: "showTraitRollOptions",
     ring: "showSpellRollOptions",
-    skill: "showSkillRollOptions"
+    skill: "showSkillRollOptions",
   };
 
   const settingsKey = settingsKeys[rollType];
@@ -489,7 +488,7 @@ export async function NpcRoll({
 
   if (showOptions) {
     const noVoid = !game.settings.get("l5r4", "allowNpcVoidPoints");
-    const { rollMod, keepMod, totalMod, applyWoundPenalty, cancelled } = await getNpcRollOptions(rollName, noVoid);
+    const {rollMod, keepMod, totalMod, applyWoundPenalty, cancelled} = await getNpcRollOptions(rollName, noVoid);
 
     if (cancelled) return;
 
@@ -502,20 +501,20 @@ export async function NpcRoll({
     }
   }
 
-  ({ diceRoll, diceKeep, bonus } = TenDiceRule(diceRoll, diceKeep, bonus));
+  ({diceRoll, diceKeep, bonus} = tenDiceRule(diceRoll, diceKeep, bonus));
 
   const rollFormula = `${diceRoll}d10k${diceKeep}x10+${bonus}`;
 
   if (description) {
-    label += ` (${description})`
+    label += ` (${description})`;
   }
 
   const messageData = {
     flavor: label,
-    speaker: ChatMessage.getSpeaker()
-  }
+    speaker: ChatMessage.getSpeaker(),
+  };
 
-  return await new Roll(rollFormula).roll({ async: true }).toMessage(messageData)
+  return await new Roll(rollFormula).roll({async: true}).toMessage(messageData);
 }
 
 async function getNpcRollOptions(rollName, noVoid) {
@@ -523,36 +522,36 @@ async function getNpcRollOptions(rollName, noVoid) {
     return {
       rollMod: parseInt(form.rollMod.value),
       keepMod: parseInt(form.keepMod.value),
-      totalMod: parseInt(form.totalMod.value)
-    }
+      totalMod: parseInt(form.totalMod.value),
+    };
   }
 
   const template = "systems/l5r4/templates/chat/roll-modifiers-dialog.hbs";
-  const html = await renderTemplate(template, { noVoid });
+  const content = await renderTemplate(template, {noVoid});
 
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const data = {
       title: rollName,
-      content: html,
+      content,
       buttons: {
         normal: {
           label: game.i18n.localize("l5r4.mech.roll"),
-          callback: html => resolve(_processNpcRollOptions(html[0].querySelector("form")))
+          callback: (html) => resolve(_processNpcRollOptions(html[0].querySelector("form"))),
         },
         cancel: {
           label: game.i18n.localize("l5r4.mech.cancel"),
-          callback: () => resolve({ cancelled: true })
-        }
+          callback: () => resolve({cancelled: true}),
+        },
       },
       default: "normal",
-      close: () => resolve({ cancelled: true })
+      close: () => resolve({cancelled: true}),
     };
 
     new Dialog(data, null).render(true);
   });
 }
 
-function TenDiceRule(diceRoll, diceKeep, bonus) {
+function tenDiceRule(diceRoll, diceKeep, bonus) {
   // Check for house rule before mutating any numbers
   const LtHouseRule = game.settings.get("l5r4", "useLtTenDiceRule");
   const addLtBonus = LtHouseRule && diceRoll > 10 && diceRoll % 2;
@@ -591,5 +590,5 @@ function TenDiceRule(diceRoll, diceKeep, bonus) {
     bonus += extras * 2;
   }
 
-  return { diceRoll, diceKeep, bonus }
-} 
+  return {diceRoll, diceKeep, bonus};
+}

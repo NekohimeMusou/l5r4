@@ -1,10 +1,9 @@
 export default class L5R4ItemSheet extends ItemSheet {
-
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       width: 530,
       height: 540,
-      classes: ["l5r4", "sheet", "item"]
+      classes: ["l5r4", "sheet", "item"],
     });
   }
 
@@ -14,12 +13,12 @@ export default class L5R4ItemSheet extends ItemSheet {
 
   getData() {
     const baseData = super.getData();
-    let sheetData = {
+    const sheetData = {
       owner: this.item.isOwner,
       editable: this.isEditable,
       item: baseData.item,
       data: baseData.item.system,
-      config: CONFIG.l5r4
+      config: CONFIG.l5r4,
     };
 
     return sheetData;

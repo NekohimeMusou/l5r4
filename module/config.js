@@ -5,16 +5,16 @@ l5r4.arrows = {
   flesh: "l5r4.arrows.flesh",
   humming: "l5r4.arrows.humming",
   rope: "l5r4.arrows.rope",
-  willow: "l5r4.arrows.willow"
-}
+  willow: "l5r4.arrows.willow",
+};
 
 l5r4.rings = {
   fire: "l5r4.rings.fire",
   water: "l5r4.rings.water",
   air: "l5r4.rings.air",
   earth: "l5r4.rings.earth",
-  void: "l5r4.rings.void"
-}
+  void: "l5r4.rings.void",
+};
 
 l5r4.traits = {
   sta: "l5r4.traits.sta",
@@ -25,8 +25,8 @@ l5r4.traits = {
   awa: "l5r4.traits.awa",
   agi: "l5r4.traits.agi",
   int: "l5r4.traits.int",
-  void: "l5r4.rings.void"
-}
+  void: "l5r4.rings.void",
+};
 
 l5r4.npcTraits = {
   sta: "l5r4.traits.sta",
@@ -36,33 +36,33 @@ l5r4.npcTraits = {
   ref: "l5r4.traits.ref",
   awa: "l5r4.traits.awa",
   agi: "l5r4.traits.agi",
-  int: "l5r4.traits.int"
-}
+  int: "l5r4.traits.int",
+};
 
 l5r4.skillTypes = {
   high: "l5r4.skillTypes.high",
   bugei: "l5r4.skillTypes.bugei",
   merch: "l5r4.skillTypes.merch",
-  low: "l5r4.skillTypes.low"
-}
+  low: "l5r4.skillTypes.low",
+};
 
 l5r4.actionTypes = {
   simple: "l5r4.mech.simple",
   complex: "l5r4.mech.complex",
-  free: "l5r4.mech.free"
-}
+  free: "l5r4.mech.free",
+};
 
 l5r4.kihoTypes = {
   internal: "l5r4.kiho.internal",
   karmic: "l5r4.kiho.karmic",
   martial: "l5r4.kiho.martial",
-  mystic: "l5r4.kiho.mystic"
-}
+  mystic: "l5r4.kiho.mystic",
+};
 
 l5r4.advantageTypes = {
   physical: "l5r4.advantage.physical",
   mental: "l5r4.advantage.mental",
   social: "l5r4.advantage.social",
   material: "l5r4.advantage.material",
-  spiritual: "l5r4.advantage.spiritual"
-}
+  spiritual: "l5r4.advantage.spiritual",
+};

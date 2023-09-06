@@ -1,12 +1,13 @@
 import * as Dice from "../dice.js";
+import * as Chat from "../chat.js";
 
 export default class L5R4NpcSheet extends ActorSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       template: "systems/l5r4/templates/sheets/npc-sheet.hbs",
       classes: ["l5r4", "npc"],
-      width: 650
-    })
+      width: 650,
+    });
   }
 
   get template() {
@@ -29,17 +30,19 @@ export default class L5R4NpcSheet extends ActorSheet {
     // Add config data to base sctructure
     baseData.config = CONFIG.l5r4;
 
-    baseData.skills = baseData.items.filter(function (item) { return item.type == "skill" });
+    baseData.skills = baseData.items.filter(function(item) {
+      return item.type == "skill";
+    });
 
     return baseData;
   }
 
   _getCurrentWoundLevel() {
     const woundLvls = Object.values(this.actor.system.woundLvlsUsed);
-    const currentLevel = woundLvls.filter(woundLvl => woundLvl.current === true).reduce((maxWoundLevel, currentWoundLevel) => {
+    const currentLevel = woundLvls.filter((woundLvl) => woundLvl.current === true).reduce((maxWoundLevel, currentWoundLevel) => {
       return Number(maxWoundLevel.penalty) > Number(currentWoundLevel.penalty) ? maxWoundLevel : currentWoundLevel;
     });
-    return currentLevel || this.actor.system.woundLvlsUsed.healthy
+    return currentLevel || this.actor.system.woundLvlsUsed.healthy;
   }
 
   get woundPenalty() {
@@ -48,7 +51,7 @@ export default class L5R4NpcSheet extends ActorSheet {
   }
 
   activateListeners(html) {
-    //TEMPLATE: html.find(cssSelector).event(this._someCallBack.bind(this)); 
+    // TEMPLATE: html.find(cssSelector).event(this._someCallBack.bind(this));
 
     if (this.actor.isOwner) {
       html.find(".item-create").click(this._onItemCreate.bind(this));
@@ -79,16 +82,16 @@ export default class L5R4NpcSheet extends ActorSheet {
     // Suss out the roll type so we can apply the correct setting
     const rollType = rollTypeLabel?.split(" ")[0].toLocaleLowerCase();
 
-    return await Dice.NpcRoll(
-      {
-        woundPenalty,
-        diceRoll,
-        diceKeep,
-        rollName,
-        toggleOptions,
-        rollType
-      }
-    )
+    return await Dice.npcRoll(
+        {
+          woundPenalty,
+          diceRoll,
+          diceKeep,
+          rollName,
+          toggleOptions,
+          rollType,
+        },
+    );
   }
 
   async _onAttackRoll(event) {
@@ -100,17 +103,17 @@ export default class L5R4NpcSheet extends ActorSheet {
     const toggleOptions = event.shiftKey;
     const rollType = "skill";
 
-    return await Dice.NpcRoll(
-      {
-        woundPenalty,
-        diceRoll,
-        diceKeep,
-        rollName,
-        description,
-        toggleOptions,
-        rollType
-      }
-    )
+    return await Dice.npcRoll(
+        {
+          woundPenalty,
+          diceRoll,
+          diceKeep,
+          rollName,
+          description,
+          toggleOptions,
+          rollType,
+        },
+    );
   }
 
   async _onDamageRoll(event) {
@@ -121,101 +124,105 @@ export default class L5R4NpcSheet extends ActorSheet {
     const toggleOptions = event.shiftKey;
     const rollType = "skill";
 
-    return await Dice.NpcRoll(
-      {
-        diceRoll,
-        diceKeep,
-        rollName,
-        description,
-        toggleOptions,
-        rollType
-      }
-    )
+    return await Dice.npcRoll(
+        {
+          diceRoll,
+          diceKeep,
+          rollName,
+          description,
+          toggleOptions,
+          rollType,
+        },
+    );
   }
 
   async _onItemCreate(event) {
     event.preventDefault();
-    let element = event.currentTarget;
-    let elementType = element.dataset.type;
+    const element = event.currentTarget;
+    const elementType = element.dataset.type;
     let itemData = {};
     if (elementType == "equipment") {
-      let equipmentOptions = await Chat.GetItemOptions(elementType);
-      if (equipmentOptions.cancelled) { return; }
+      const equipmentOptions = await Chat.getItemOptions(elementType);
+      if (equipmentOptions.cancelled) {
+        return;
+      }
       itemData = {
         name: equipmentOptions.name,
-        type: equipmentOptions.type
-      }
+        type: equipmentOptions.type,
+      };
       return this.actor.createEmbeddedDocuments("Item", [itemData]);
     } else if (elementType == "spell") {
-      let spellOptions = await Chat.GetItemOptions(elementType);
-      if (spellOptions.cancelled) { return; }
+      const spellOptions = await Chat.getItemOptions(elementType);
+      if (spellOptions.cancelled) {
+        return;
+      }
       itemData = {
         name: spellOptions.name,
-        type: spellOptions.type
-      }
+        type: spellOptions.type,
+      };
       return this.actor.createEmbeddedDocuments("Item", [itemData]);
     } else {
       itemData = {
         name: game.i18n.localize("l5r4.sheet.new"),
-        type: element.dataset.type
-      }
+        type: element.dataset.type,
+      };
       return this.actor.createEmbeddedDocuments("Item", [itemData]);
     }
   }
 
   _onItemEdit(event) {
     event.preventDefault();
-    let element = event.currentTarget;
-    let itemId = element.closest(".item").dataset.itemId;
-    let item = this.actor.items.get(itemId);
+    const element = event.currentTarget;
+    const itemId = element.closest(".item").dataset.itemId;
+    const item = this.actor.items.get(itemId);
 
     item.sheet.render(true);
   }
 
   _onItemDelete(event) {
     event.preventDefault();
-    let element = event.currentTarget;
-    let itemId = element.closest(".item").dataset.itemId;
+    const element = event.currentTarget;
+    const itemId = element.closest(".item").dataset.itemId;
 
     return this.actor.deleteEmbeddedDocuments("Item", [itemId]);
   }
 
   _onInlineItemEdit(event) {
     event.preventDefault();
-    let element = event.currentTarget;
-    let itemId = element.closest(".item").dataset.itemId;
-    let item = this.actor.items.get(itemId);
-    let field = element.dataset.field;
+    const element = event.currentTarget;
+    const itemId = element.closest(".item").dataset.itemId;
+    const item = this.actor.items.get(itemId);
+    const field = element.dataset.field;
 
     if (element.type == "checkbox") {
-      return item.update({ [field]: element.checked })
+      return item.update({[field]: element.checked});
     }
 
-    return item.update({ [field]: element.value })
+    return item.update({[field]: element.value});
   }
 
   _onSkillRoll(event) {
     const itemID = event.currentTarget.closest(".item").dataset.itemId;
     const item = this.actor.items.get(itemID);
-    let skillTrait = item.system.trait;
+    const skillTrait = item.system.trait;
     let actorTrait = null;
     // some skills use the void ring as a trait
-    if (skillTrait == 'void') {
-      return ui.notifications.error(`NPCs don't have Void`);
+    if (skillTrait == "void") {
+      return ui.notifications.error("NPCs don't have Void");
     } else {
       actorTrait = this.actor.system.traits[skillTrait];
     }
-    let skillRank = item.system.rank;
-    let skillName = item.name;
+    const skillRank = item.system.rank;
+    const skillName = item.name;
 
-    Dice.SkillRoll({
+    Dice.skillRoll({
       woundPenalty: this.woundPenalty,
       actorTrait: actorTrait,
       skillRank: skillRank,
       skillName: skillName,
       askForOptions: event.shiftKey,
       npc: true,
-      skillTrait
+      skillTrait,
     });
   }
 }

@@ -1,36 +1,34 @@
 export default class L5R4Actor extends Actor {
-
   async _preCreate(data, options, user) {
     await super._preCreate(data, options, user);
 
     if (this.type === "pc") {
       // pc token settings
       this.prototypeToken.updateSource(
-        {
-          bar1: { "attribute": "wounds" },
-          bar2: { "attribute": "suffered" },
-          displayName: CONST.TOKEN_DISPLAY_MODES.ALWAYS,
-          displayBars: CONST.TOKEN_DISPLAY_MODES.OWNER,
-          disposition: CONST.TOKEN_DISPOSITIONS.FRIENDLY,
-          name: this.name,
-          vision: true,
-          actorLink: true,
-        });
-      this.updateSource({ img: "systems/l5r4/assets/icons/helm.png" });
+          {
+            bar1: {"attribute": "wounds"},
+            bar2: {"attribute": "suffered"},
+            displayName: CONST.TOKEN_DISPLAY_MODES.ALWAYS,
+            displayBars: CONST.TOKEN_DISPLAY_MODES.OWNER,
+            disposition: CONST.TOKEN_DISPOSITIONS.FRIENDLY,
+            name: this.name,
+            vision: true,
+            actorLink: true,
+          });
+      this.updateSource({img: "systems/l5r4/assets/icons/helm.png"});
     } else {
       // npc token settings
       this.prototypeToken.updateSource(
-        {
-          bar1: { "attribute": "wounds" },
-          bar2: { "attribute": "suffered" },
-          displayName: CONST.TOKEN_DISPLAY_MODES.OWNER,
-          displayBars: CONST.TOKEN_DISPLAY_MODES.OWNER,
-          disposition: CONST.TOKEN_DISPOSITIONS.HOSTILE,
-          name: this.name,
-        });
-      this.updateSource({ img: "systems/l5r4/assets/icons/ninja.png" });
+          {
+            bar1: {"attribute": "wounds"},
+            bar2: {"attribute": "suffered"},
+            displayName: CONST.TOKEN_DISPLAY_MODES.OWNER,
+            displayBars: CONST.TOKEN_DISPLAY_MODES.OWNER,
+            disposition: CONST.TOKEN_DISPOSITIONS.HOSTILE,
+            name: this.name,
+          });
+      this.updateSource({img: "systems/l5r4/assets/icons/ninja.png"});
     }
-
   }
 
   prepareData() {
@@ -49,13 +47,19 @@ export default class L5R4Actor extends Actor {
 
   /**
   * Prepare Character type specific data
+  * @param {Actor} actorData - Actor object
+  * @param {any} l5r4Data - Actor system data
   */
   _preparePcData(actorData, l5r4Data) {
-    if (actorData.type !== 'pc') return;
+    if (actorData.type !== "pc") return;
 
     // get skills and armors
-    let skills = this.items.filter(function (item) { return item.type == "skill" });
-    let armors = this.items.filter(function (item) { return item.type == "armor" });
+    const skills = this.items.filter(function(item) {
+      return item.type == "skill";
+    });
+    const armors = this.items.filter(function(item) {
+      return item.type == "armor";
+    });
 
     // calculate rings
     l5r4Data.rings.air = Math.min(l5r4Data.traits.ref, l5r4Data.traits.awa);
@@ -89,7 +93,7 @@ export default class L5R4Actor extends Actor {
     let armorReduction = 0;
     let armorData = {};
     let armorBonus = 0;
-    armors.forEach(armor => {
+    armors.forEach((armor) => {
       armorData = armor.getRollData();
       if (armorData.equiped) {
         if (parseInt(armorData.bonus) > armorBonus) {
@@ -111,24 +115,24 @@ export default class L5R4Actor extends Actor {
 
 
     // calculate current would level
-    let prev = { value: -1 };
-    for (const [lvl, lvlData] of Object.entries(l5r4Data.wound_lvl)) {
+    let prev = {value: -1};
+    for (const lvlData of Object.values(l5r4Data.wound_lvl)) {
       if (l5r4Data.suffered <= lvlData.value && l5r4Data.suffered > prev.value) {
         lvlData.current = true;
       } else {
         lvlData.current = false;
       }
-      prev = lvlData
+      prev = lvlData;
     }
     // calculate woundPenalty
-    let woundLvls = Object.values(l5r4Data.wound_lvl);
-    l5r4Data.currentWoundLevel = woundLvls.filter(lvl => lvl.current)[0] || this.actor.system.wound_lvl.healthy
-    l5r4Data.woundPenalty = l5r4Data.currentWoundLevel.penalty
+    const woundLvls = Object.values(l5r4Data.wound_lvl);
+    l5r4Data.currentWoundLevel = woundLvls.filter((lvl) => lvl.current)[0] || this.actor.system.wound_lvl.healthy;
+    l5r4Data.woundPenalty = l5r4Data.currentWoundLevel.penalty;
 
     // calculate insight points
-    let insightRings = ((l5r4Data.rings.air + l5r4Data.rings.earth + l5r4Data.rings.fire + l5r4Data.rings.water + l5r4Data.rings.void.rank) * 10);
+    const insightRings = ((l5r4Data.rings.air + l5r4Data.rings.earth + l5r4Data.rings.fire + l5r4Data.rings.water + l5r4Data.rings.void.rank) * 10);
     let insighSkills = 0;
-    for (const [skill, skillData] of Object.entries(skills)) {
+    for (const skillData of Object.values(skills)) {
       insighSkills += parseInt(skillData.system.rank) + parseInt(skillData.system.insight_bonus);
     }
     l5r4Data.insight.points = insightRings + insighSkills;
@@ -140,14 +144,13 @@ export default class L5R4Actor extends Actor {
     l5r4Data.wounds.value = parseInt(l5r4Data.wounds.max) - parseInt(l5r4Data.suffered);
 
     // calculate nr of wound lvls
-    let nrWoundLvls = parseInt(l5r4Data.nrWoundLvls);
+    const nrWoundLvls = parseInt(l5r4Data.nrWoundLvls);
 
     l5r4Data.woundLvlsUsed = Object.fromEntries(
-      Object.entries(l5r4Data.wound_lvl).slice(0, nrWoundLvls));
+        Object.entries(l5r4Data.wound_lvl).slice(0, nrWoundLvls));
 
     // calculate current would level
-    for (const [lvl, lvlData] of Object.entries(l5r4Data.wound_lvl)) {
-
+    for (const lvlData of Object.values(l5r4Data.wound_lvl)) {
       if (l5r4Data.suffered >= lvlData.value) {
         lvlData.current = true;
       } else {

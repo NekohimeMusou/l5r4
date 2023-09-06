@@ -18,47 +18,46 @@ export default class L5R4Item extends Item {
     let img = null;
     if (data.img === undefined) {
       switch (this.type) {
-        case 'weapon':
+        case "weapon":
           img = "systems/l5r4/assets/icons/sword.png";
           break;
-        case 'bow':
+        case "bow":
           img = "systems/l5r4/assets/icons/bow.png";
           break;
-        case 'skill':
+        case "skill":
           img = "systems/l5r4/assets/icons/flower.png";
           break;
-        case 'armor':
+        case "armor":
           img = "systems/l5r4/assets/icons/hat.png";
           break;
-        case 'spell':
+        case "spell":
           img = "systems/l5r4/assets/icons/scroll2.png";
           break;
-        case 'technique':
+        case "technique":
           img = "systems/l5r4/assets/icons/kanji.png";
           break;
-        case 'advantage':
+        case "advantage":
           img = "systems/l5r4/assets/icons/yin-yang.png";
           break;
-        case 'disadvantage':
+        case "disadvantage":
           img = "systems/l5r4/assets/icons/yin-yang.png";
           break;
-        case 'kata':
+        case "kata":
           img = "systems/l5r4/assets/icons/scroll.png";
           break;
-        case 'kiho':
+        case "kiho":
           img = "systems/l5r4/assets/icons/tori.png";
           break;
-
       }
-      if (img) await this.updateSource({ img: img });
+      if (img) await this.updateSource({img: img});
     }
   }
 
   prepareData() {
     super.prepareData();
 
-    let itemData = this;
-    let l5r4Data = itemData.system;
+    const itemData = this;
+    const l5r4Data = itemData.system;
 
     // get damage from arrows for bows
     if (itemData.type == "bow") {
@@ -73,7 +72,7 @@ export default class L5R4Item extends Item {
       }
       let arrowRoll = 0;
       let arrowKeep = 0;
-      let arrow = game.i18n.localize(`l5r4.arrows.${l5r4Data.arrow}`);
+      const arrow = game.i18n.localize(`l5r4.arrows.${l5r4Data.arrow}`);
       switch (arrow) {
         case game.i18n.localize("l5r4.arrows.armor"):
           arrowRoll = 1;
@@ -100,8 +99,6 @@ export default class L5R4Item extends Item {
       l5r4Data.damageKeep = arrowKeep;
       l5r4Data.damageFormula = `${l5r4Data.damageRoll}k${l5r4Data.damageKeep}`;
     }
-
-
   }
 
   async roll() {
@@ -109,9 +106,9 @@ export default class L5R4Item extends Item {
 
     // Initialize chat data.
 
-    let content = await renderTemplate(this.chatTemplate[this.type], item);
-    const speaker = ChatMessage.getSpeaker({ actor: this.actor });
-    const rollMode = game.settings.get('core', 'rollMode');
+    const content = await renderTemplate(this.chatTemplate[this.type], item);
+    const speaker = ChatMessage.getSpeaker({actor: this.actor});
+    const rollMode = game.settings.get("core", "rollMode");
     const label = `[${item.type}]`;
 
     // send a chat message.
@@ -120,8 +117,7 @@ export default class L5R4Item extends Item {
       speaker: speaker,
       rollMode: rollMode,
       flavor: label,
-      content: content ?? ''
+      content: content ?? "",
     });
-
   }
 }
