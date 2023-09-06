@@ -114,7 +114,7 @@ export default class L5R4Actor extends Actor {
     l5r4Data.wounds.value = parseInt(l5r4Data.wounds.max) - parseInt(l5r4Data.suffered);
 
 
-    // calculate current would level
+    // calculate current wound level
     let prev = {value: -1};
     for (const lvlData of Object.values(l5r4Data.wound_lvl)) {
       if (l5r4Data.suffered <= lvlData.value && l5r4Data.suffered > prev.value) {
@@ -131,15 +131,16 @@ export default class L5R4Actor extends Actor {
 
     // calculate insight points
     const insightRings = ((l5r4Data.rings.air + l5r4Data.rings.earth + l5r4Data.rings.fire + l5r4Data.rings.water + l5r4Data.rings.void.rank) * 10);
-    let insighSkills = 0;
+    let insightSkills = 0;
     for (const skillData of Object.values(skills)) {
-      insighSkills += parseInt(skillData.system.rank) + parseInt(skillData.system.insight_bonus);
+      insightSkills += parseInt(skillData.system.rank) + parseInt(skillData.system.insight_bonus);
     }
-    l5r4Data.insight.points = insightRings + insighSkills;
+    l5r4Data.insight.points = insightRings + insightSkills;
   }
 
   _prepareNpcData(actorData, l5r4Data) {
     if (actorData.type !== "npc") return;
+
     // calculate current "hp"
     l5r4Data.wounds.value = parseInt(l5r4Data.wounds.max) - parseInt(l5r4Data.suffered);
 
@@ -149,7 +150,7 @@ export default class L5R4Actor extends Actor {
     l5r4Data.woundLvlsUsed = Object.fromEntries(
         Object.entries(l5r4Data.wound_lvl).slice(0, nrWoundLvls));
 
-    // calculate current would level
+    // calculate current wound level
     for (const lvlData of Object.values(l5r4Data.wound_lvl)) {
       if (l5r4Data.suffered >= lvlData.value) {
         lvlData.current = true;

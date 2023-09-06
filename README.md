@@ -7,9 +7,9 @@
 
 Unofficial implementation of the Legend of the Five Rings 4th edition for Foundry VTT. Provides character sheets for pcs and npcs.
 
-Forked from <https://gitlab.com/team-l5r4/l5r4>.
+Forked from <https://gitlab.com/team-l5r4/l5r4>. The system hasn't been updated in a while and a few bugs have been bothering my group, so I'm taking ownership for now.
 
-### Features
+## Features
 
 - Trait rolls, ring rolls, spellcasting rolls, skill rolls and damage rolls from the character sheet.
 - Enforces the "Ten dice rule" for rolls from the character sheet.
@@ -33,7 +33,7 @@ Alternatively you can download this repo into your foundry data: `your_foundry_d
 
 ## Recomended modules
 
-The L5R4ed dice rolles allows for rolls directly into the chat for quick rolls that are not covered by the system
+The L5R4ed dice roller allows for rolls directly into the chat for quick rolls that are not covered by the system
 <https://github.com/eupolemo/fvtt-l5r4ed-dice-roller>
 
 Compatible with Dice So Nice!
