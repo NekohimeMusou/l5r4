@@ -11,6 +11,7 @@ parserOptions:
 rules:
   max-len: off
   require-jsdoc: off
+  linebreak-style: off
   no-shadow:
   - error
   - builtinGlobals: true

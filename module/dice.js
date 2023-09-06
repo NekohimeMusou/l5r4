@@ -147,7 +147,7 @@ export async function ringRoll({
       schoolRank -= 1;
     }
     if (schoolRank <= 0) {
-      return ui.notifications.error(game.i18n.localize("l5r4.errors.scoolRankZero"));
+      return ui.notifications.error(game.i18n.localize("l5r4.errors.schoolRankZero"));
     }
     const diceToRoll = parseInt(ringRank) + parseInt(schoolRank) + parseInt(rollMod);
     const diceToKeep = parseInt(ringRank) + parseInt(keepMod);

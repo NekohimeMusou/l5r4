@@ -9,7 +9,7 @@
       "voidSlot": "Usar espacio de Vacío?"
     },
     "errors": {
-      "scoolRankZero": "No puedes lanzar ningún conjuro con rango de escuela reducido a cero.",
+      "schoolRankZero": "No puedes lanzar ningún conjuro con rango de escuela reducido a cero.",
       "noSpellSlots": "No tienes suficientes espacios para conjuro de este anillo"
     },
     "mech": {

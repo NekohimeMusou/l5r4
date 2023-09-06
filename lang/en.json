@@ -9,7 +9,7 @@
       "voidSlot": "Use Void spell slot?"
     },
     "errors": {
-      "scoolRankZero": "You can't cast a spell with School Rank reduced to zero",
+      "schoolRankZero": "You can't cast a spell with School Rank reduced to zero",
       "noSpellSlots": "You ran out of spell slots for this ring"
     },
     "mech": {

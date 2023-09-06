@@ -9,7 +9,7 @@
       "voidSlot": "Utiliser l'emplacement de vide?"
     },
     "errors": {
-      "scoolRankZero": "Vous ne pouvez lancer un sort avec un Rang d'École réduit à zéro",
+      "schoolRankZero": "Vous ne pouvez lancer un sort avec un Rang d'École réduit à zéro",
       "noSpellSlots": "Vous n'avez pas assez d'emplacements pour les sorts de cet anneau"
     },
     "mech": {
