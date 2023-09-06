@@ -9,7 +9,6 @@ extends:
 parserOptions:
   sourceType: module
 rules:
-  linebreak-style: off
   max-len: off
   require-jsdoc: off
   no-shadow:
