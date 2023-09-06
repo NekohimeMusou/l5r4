@@ -66,3 +66,33 @@ l5r4.advantageTypes = {
   material: "l5r4.advantage.material",
   spiritual: "l5r4.advantage.spiritual",
 };
+
+const iconPath = "systems/l5r4/assets/icons";
+
+l5r4.stanceEffects = [
+  {
+    "id": "attack",
+    "name": "l5r4.stances.attack",
+    "icon": `${iconPath}/water.png`,
+  },
+  {
+    "id": "fullAttack",
+    "name": "l5r4.stances.fullAttack",
+    "icon": `${iconPath}/fire.png`,
+  },
+  {
+    "id": "defense",
+    "name": "l5r4.stances.defense",
+    "icon": `${iconPath}/air.png`,
+  },
+  {
+    "id": "fullDefense",
+    "name": "l5r4.stances.fullDefense",
+    "icon": `${iconPath}/earth.png`,
+  },
+  {
+    "id": "center",
+    "name": "l5r4.stances.center",
+    "icon": `${iconPath}/void.png`,
+  },
+];

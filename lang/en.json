@@ -207,6 +207,13 @@
       "social": "Social",
       "material": "Material",
       "spiritual": "Spriritual"
+    },
+    "stances": {
+      "attack": "Attack",
+      "fullAttack": "Full Attack",
+      "defense": "Defense",
+      "fullDefense": "Full Defense",
+      "center": "Center"
     }
   },
   "SETTINGS": {
