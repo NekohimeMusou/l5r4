@@ -38,7 +38,13 @@ Hooks.once("init", function() {
   Actors.registerSheet("l5r4", L5R4PcSheet, {types: ["pc"], makeDefault: true});
   Actors.registerSheet("l5r4", L5R4NpcSheet, {types: ["npc"], makeDefault: true});
 
+  handleLegacyBehavior();
   preloadHandlebarsTemplates();
   registerHandlebarsHelpers();
   registerSystemSettings();
 });
+
+function handleLegacyBehavior() {
+  // Disable legacy active effect transferral
+  CONFIG.ActiveEffect.legacyTransferral = false;
+}

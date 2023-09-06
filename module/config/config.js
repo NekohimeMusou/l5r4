@@ -68,6 +68,7 @@ l5r4.advantageTypes = {
 };
 
 const iconPath = "systems/l5r4/assets/icons";
+// const {ADD, CUSTOM, DOWNGRADE, MULTIPLY, OVERRIDE, UPGRADE} = CONST.ACTIVE_EFFECT_MODES;
 
 l5r4.stanceEffects = [
   {
