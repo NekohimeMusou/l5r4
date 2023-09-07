@@ -38,6 +38,7 @@ export default class L5R4Actor extends Actor {
   prepareBaseData() {
     const actorData = this;
     const l5r4Data = actorData.system;
+    l5r4Data.inFAStance = false;
 
     // Make separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.

@@ -5,7 +5,8 @@ export async function skillRoll({
   skillName = null,
   askForOptions = true,
   npc = false,
-  skillTrait = null} = {}) {
+  skillTrait = null,
+  inFAStance = false} = {}) {
   const messageTemplate = "systems/l5r4/templates/chat/simple-roll.hbs";
 
   const traitString = skillTrait === "void" ? "l5r4.rings.void" : `l5r4.traits.${skillTrait}`;
@@ -21,7 +22,7 @@ export async function skillRoll({
 
   if (askForOptions != optionsSettings) {
     const noVoid = npc && !game.settings.get("l5r4", "allowNpcVoidPoints");
-    const checkOptions = await getSkillOptions(skillName, noVoid);
+    const checkOptions = await getSkillOptions(skillName, noVoid, inFAStance);
     if (checkOptions.cancelled) {
       return;
     }
@@ -35,7 +36,7 @@ export async function skillRoll({
     if (checkOptions.void) {
       rollMod += 1;
       keepMod += 1;
-      label += ` ${game.i18n.localize("l5r4.rings.void")}!`;
+      label += ` ${game.i18n.localize("l5r4.rings.void").toLocaleUpperCase()}!`;
     }
   }
 
@@ -234,9 +235,17 @@ export async function traitRoll({
   rollResult.toMessage(messageData);
 }
 
-async function getSkillOptions(skillName, noVoid) {
+async function getSkillOptions(skillName, noVoid, inFAStance) {
   const template = "systems/l5r4/templates/chat/roll-modifiers-dialog.hbs";
-  const content = await renderTemplate(template, {skill: true, noVoid});
+
+  // Hack for FA stance
+  const preFills = {roll: 0, keep: 0, bonus: 0};
+  if (inFAStance) {
+    preFills.roll += 2;
+    preFills.keep += 1;
+  }
+
+  const content = await renderTemplate(template, {skill: true, noVoid, preFills});
 
   return new Promise((resolve) => {
     const data = {

@@ -68,7 +68,7 @@ l5r4.advantageTypes = {
 };
 
 const iconPath = "systems/l5r4/assets/icons";
-const {ADD/** , CUSTOM, DOWNGRADE, MULTIPLY, OVERRIDE, UPGRADE*/} = CONST.ACTIVE_EFFECT_MODES;
+const {ADD, OVERRIDE /** , CUSTOM, DOWNGRADE, MULTIPLY, UPGRADE*/} = CONST.ACTIVE_EFFECT_MODES;
 
 l5r4.stanceEffects = [
   {
@@ -85,6 +85,11 @@ l5r4.stanceEffects = [
         key: "system.armor_tn.current",
         value: -10,
         mode: ADD,
+      },
+      {
+        key: "system.inFAStance",
+        value: true,
+        mode: OVERRIDE,
       },
     ],
   },

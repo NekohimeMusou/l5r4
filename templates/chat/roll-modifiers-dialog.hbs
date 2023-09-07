@@ -43,14 +43,14 @@
   {{/if}}
   <div class="form-group">
     <label>{{localize "l5r4.mech.roll"}} {{localize "l5r4.mech.mod"}}?</label>
-    <input type="number" name="rollMod" value="0" />
+    <input type="number" name="rollMod" value="{{preFills.roll}}" />
   </div>
   <div class="form-group">
     <label>{{localize "l5r4.mech.keep"}} {{localize "l5r4.mech.mod"}}?</label>
-    <input type="number" name="keepMod" value="0" />
+    <input type="number" name="keepMod" value="{{preFills.keep}}" />
   </div>
   <div class="form-group">
     <label>{{localize "l5r4.mech.total"}} {{localize "l5r4.mech.mod"}} ?</label>
-    <input type="number" name="totalMod" value="0" />
+    <input type="number" name="totalMod" value="{{preFills.bonus}}" />
   </div>
 </form>

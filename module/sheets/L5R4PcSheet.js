@@ -235,10 +235,11 @@ export default class L5R4PcSheet extends ActorSheet {
     Dice.skillRoll({
       woundPenalty: this.actor.system.woundPenalty,
       actorTrait: actorTrait,
-      skillRank: skillRank,
-      skillName: skillName,
+      skillRank,
+      skillName,
       askForOptions: event.shiftKey,
       skillTrait,
+      inFAStance: this.actor.system.inFAStance,
     });
   }
 
