@@ -35,7 +35,7 @@ export default class L5R4Actor extends Actor {
     super.prepareData();
   }
 
-  prepareDerivedData() {
+  prepareBaseData() {
     const actorData = this;
     const l5r4Data = actorData.system;
 
