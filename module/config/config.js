@@ -68,7 +68,7 @@ l5r4.advantageTypes = {
 };
 
 const iconPath = "systems/l5r4/assets/icons";
-const {ADD, OVERRIDE /** , CUSTOM, DOWNGRADE, MULTIPLY, UPGRADE*/} = CONST.ACTIVE_EFFECT_MODES;
+const {ADD, OVERRIDE, CUSTOM} = CONST.ACTIVE_EFFECT_MODES;
 
 l5r4.stanceEffects = [
   {
@@ -97,6 +97,18 @@ l5r4.stanceEffects = [
     id: "defense",
     name: "l5r4.stances.defense",
     icon: `${iconPath}/air.png`,
+    changes: [
+      {
+        key: "system.armor_tn.current",
+        value: "rings.air",
+        mode: CUSTOM,
+      },
+      {
+        key: "system.armor_tn.current",
+        value: "skills.defense",
+        mode: CUSTOM,
+      },
+    ],
   },
   {
     id: "fullDefense",
