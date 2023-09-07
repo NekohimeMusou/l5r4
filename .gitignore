@@ -2,8 +2,14 @@
 
 fvtt/
 
+# Compendium packs
+
 packs/*/*
 !packs/*/_source
+
+# System lock file
+
+l5r4.lock
 
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,node
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,node
