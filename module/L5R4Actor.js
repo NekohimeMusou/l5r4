@@ -96,7 +96,7 @@ export default class L5R4Actor extends Actor {
     let armorBonus = 0;
     armors.forEach((armor) => {
       armorData = armor.getRollData();
-      if (armorData.equiped) {
+      if (armorData.equipped) {
         if (parseInt(armorData.bonus) > armorBonus) {
           armorBonus = parseInt(armorData.bonus);
         }

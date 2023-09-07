@@ -61,7 +61,7 @@
       "name": "Armor",
       "bonus": "Bonus",
       "reduction": "Reduction",
-      "equiped": "Equipped"
+      "equipped": "Equipped"
     },
     "spell": {
       "ring": "Ring",

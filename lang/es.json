@@ -61,7 +61,7 @@
       "name": "Armadura",
       "bonus": "Bonificador",
       "reduction": "Reducción",
-      "equiped": "Equipado"
+      "equipped": "Equipado"
     },
     "spell": {
       "ring": "Anillo",

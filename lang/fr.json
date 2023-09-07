@@ -61,7 +61,7 @@
       "name": "Armure",
       "bonus": "Bonus",
       "reduction": "Réduction",
-      "equiped": "Équipée"
+      "equipped": "Équipée"
     },
     "spell": {
       "ring": "Anneau",

@@ -221,8 +221,7 @@
       ],
       "bonus": 0,
       "reduction": 0,
-      "specialRues": "",
-      "equiped": false
+      "equipped": false
     },
     "spell": {
       "templates": [
