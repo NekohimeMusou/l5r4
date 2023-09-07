@@ -13,11 +13,14 @@
       "discord": "nekohime.musou"
     }
   ],
-  "version": "0.7.10",
+  "version": "0.7.11",
   "compatibility": {
     "minimum": 10,
     "verified": 11
   },
+  "url": "https://github.com/NekohimeMusou/l5r4",
+  "manifest": "https://raw.githubusercontent.com/NekohimeMusou/l5r4/master/system.json",
+  "download": "https://github.com/NekohimeMusou/l5r4/releases/download/v0.7.11/l5r4-v0.7.11.zip",
   "esmodules": [
     "l5r4.js"
   ],
@@ -45,8 +48,5 @@
   ],
   "gridDistance": 5,
   "gridUnits": "ft",
-  "url": "https://github.com/NekohimeMusou/l5r4",
-  "manifest": "https://raw.githubusercontent.com/NekohimeMusou/l5r4/master/system.json",
-  "download": "https://github.com/NekohimeMusou/l5r4/releases/download/v0.7.10/l5r4-v0.7.10.zip",
   "license": "GPL v3"
 }
