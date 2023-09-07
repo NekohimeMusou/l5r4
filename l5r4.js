@@ -2,6 +2,8 @@ import {l5r4} from "./module/config/config.js";
 import preloadHandlebarsTemplates from "./module/config/templates.js";
 import registerSystemSettings from "./module/config/settings.js";
 import registerHandlebarsHelpers from "./module/config/hbs-helpers.js";
+import initializeActiveEffects from "./module/config/active-effects.js";
+
 import L5R4Actor from "./module/L5R4Actor.js";
 import L5R4Item from "./module/L5R4Item.js";
 import L5R4ItemSheet from "./module/sheets/L5R4ItemSheet.js";
@@ -42,6 +44,7 @@ Hooks.once("init", function() {
   preloadHandlebarsTemplates();
   registerHandlebarsHelpers();
   registerSystemSettings();
+  initializeActiveEffects();
 });
 
 function handleLegacyBehavior() {
