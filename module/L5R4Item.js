@@ -56,9 +56,6 @@ export default class L5R4Item extends Item {
   prepareData() {
     super.prepareData();
 
-    // Migrate misspelled keys from template.json
-    this.#fixTemplateTypos();
-
     const itemData = this;
     const l5r4Data = itemData.system;
 
@@ -122,17 +119,5 @@ export default class L5R4Item extends Item {
       flavor: label,
       content: content ?? "",
     });
-  }
-
-  #fixTemplateTypos() {
-    if (Object.hasOwn(this.system, "equiped")) {
-      this.system.equipped = this.system.equiped;
-      this.update({"-=system.equiped": null});
-    }
-
-    if (Object.hasOwn(this.system, "specialRues")) {
-      this.system.specialRules = this.system.specialRues;
-      this.update({"-=system.specialRues": null});
-    }
   }
 }
