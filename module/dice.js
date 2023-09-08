@@ -273,16 +273,17 @@ function _processSkillRollOptions(form) {
   return {
     applyWoundPenalty: form.woundPenalty.checked,
     emphasis: form.emphasis.checked,
-    rollMod: form.rollMod.value,
-    keepMod: form.keepMod.value,
-    totalMod: form.totalMod.value,
+    rollMod: parseInt(form.rollMod.value || 0),
+    keepMod: parseInt(form.keepMod.value || 0),
+    totalMod: parseInt(form.totalMod.value || 0),
     void: form.void?.checked ?? false,
   };
 }
 
 async function getTraitRollOptions(traitName) {
   const template = "systems/l5r4/templates/chat/roll-modifiers-dialog.hbs";
-  const content = await renderTemplate(template, {trait: true});
+  const preFills = {roll: 0, keep: 0, bonus: 0};
+  const content = await renderTemplate(template, {trait: true, preFills});
 
   return new Promise((resolve) => {
     const data = {
@@ -310,16 +311,17 @@ function _processTraitRollOptions(form) {
   return {
     applyWoundPenalty: form.woundPenalty.checked,
     unskilled: form.unskilled.checked,
-    rollMod: form.rollMod.value,
-    keepMod: form.keepMod.value,
-    totalMod: form.totalMod.value,
+    rollMod: parseInt(form.rollMod.value || 0),
+    keepMod: parseInt(form.keepMod.value || 0),
+    totalMod: parseInt(form.totalMod.value || 0),
     void: form.void.checked,
   };
 }
 
 async function getSpellOptions(ringName) {
   const template = "systems/l5r4/templates/chat/roll-modifiers-dialog.hbs";
-  const content = await renderTemplate(template, {spell: true, ring: ringName});
+  const preFills = {roll: 0, keep: 0, bonus: 0};
+  const content = await renderTemplate(template, {spell: true, ring: ringName, preFills});
 
   return new Promise((resolve) => {
     const data = {
@@ -352,9 +354,9 @@ function _processSpellRollOptions(form) {
     applyWoundPenalty: form.woundPenalty.checked,
     affinity: form.affinity.checked,
     deficiency: form.deficiency.checked,
-    rollMod: form.rollMod.value,
-    keepMod: form.keepMod.value,
-    totalMod: form.totalMod.value,
+    rollMod: parseInt(form.rollMod.value || 0),
+    keepMod: parseInt(form.keepMod.value || 0),
+    totalMod: parseInt(form.totalMod.value || 0),
     void: form.void.checked,
     spellSlot: form.spellSlot.checked,
     voidSlot: form.voidSlot.checked,
@@ -364,9 +366,9 @@ function _processSpellRollOptions(form) {
 function _processRingRollOptions(form) {
   return {
     applyWoundPenalty: form.woundPenalty.checked,
-    rollMod: form.rollMod.value,
-    keepMod: form.keepMod.value,
-    totalMod: form.totalMod.value,
+    rollMod: parseInt(form.rollMod.value || 0),
+    keepMod: parseInt(form.keepMod.value || 0),
+    totalMod: parseInt(form.totalMod.value || 0),
     void: form.void.checked,
     normalRoll: true,
   };
@@ -437,7 +439,8 @@ export async function weaponRoll({
 
 async function getWeaponOptions(weaponName) {
   const template = "systems/l5r4/templates/chat/roll-modifiers-dialog.hbs";
-  const content = await renderTemplate(template, {weapon: true});
+  const preFills = {roll: 0, keep: 0, bonus: 0};
+  const content = await renderTemplate(template, {weapon: true, preFills});
 
   return new Promise((resolve) => {
     const data = {
@@ -463,9 +466,9 @@ async function getWeaponOptions(weaponName) {
 
 function _processWeaponRollOptions(form) {
   return {
-    rollMod: form.rollMod.value,
-    keepMod: form.keepMod.value,
-    totalMod: form.totalMod.value,
+    rollMod: parseInt(form.rollMod.value || 0),
+    keepMod: parseInt(form.keepMod.value || 0),
+    totalMod: parseInt(form.totalMod.value || 0),
     void: form.void.checked,
   };
 }
@@ -529,9 +532,9 @@ export async function npcRoll({
 async function getNpcRollOptions(rollName, noVoid) {
   function _processNpcRollOptions(form) {
     return {
-      rollMod: parseInt(form.rollMod.value),
-      keepMod: parseInt(form.keepMod.value),
-      totalMod: parseInt(form.totalMod.value),
+      rollMod: parseInt(form.rollMod.value || 0),
+      keepMod: parseInt(form.keepMod.value || 0),
+      totalMod: parseInt(form.totalMod.value || 0),
     };
   }
 

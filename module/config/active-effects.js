@@ -14,7 +14,9 @@ function _getTraitValue(actor, targetPath) {
   const [traitType, trait] = targetPath.split(".", 2);
 
   if (traitType === "skills") {
-    const targetSkill = actor.items.find((i) => i.name.toLowerCase() === trait);
+    const targetSkill = actor.items.find(
+        (i) => i.name.toLowerCase() === trait,
+    );
 
     return Number(targetSkill?.system?.rank) || 0;
   }
