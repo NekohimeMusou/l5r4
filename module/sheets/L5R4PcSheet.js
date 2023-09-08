@@ -302,7 +302,7 @@ export default class L5R4PcSheet extends ActorSheet {
     return this.actor.deleteEmbeddedDocuments("Item", [itemId]);
   }
 
-  _onInlineItemEdit(event) {
+  async _onInlineItemEdit(event) {
     event.preventDefault();
     const element = event.currentTarget;
     const itemId = element.closest(".item").dataset.itemId;
@@ -311,9 +311,9 @@ export default class L5R4PcSheet extends ActorSheet {
 
 
     if (element.type == "checkbox") {
-      return item.update({[field]: element.checked});
+      return await item.update({[field]: element.checked});
     }
 
-    return item.update({[field]: element.value});
+    return await item.update({[field]: element.value});
   }
 }

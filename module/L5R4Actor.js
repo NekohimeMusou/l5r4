@@ -107,7 +107,7 @@ export default class L5R4Actor extends Actor {
     });
     l5r4Data.armor_tn.bonus = armorBonus;
     l5r4Data.armor_tn.reduction = armorReduction;
-    l5r4Data.armor_tn.current = l5r4Data.armor_tn.base + parseInt(l5r4Data.armor_tn.mod) + l5r4Data.armor_tn.bonus;
+    l5r4Data.armor_tn.current = l5r4Data.armor_tn.base + (parseInt(l5r4Data.armor_tn.mod) || 0) + l5r4Data.armor_tn.bonus;
 
 
     // calculate current "hp"
