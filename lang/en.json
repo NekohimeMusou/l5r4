@@ -214,6 +214,14 @@
       "defense": "Stance: Defense",
       "fullDefense": "Stance: Full Defense",
       "center": "Stance: Center"
+    },
+    "conditions": {
+      "dazed": "Dazed",
+      "entangled": "Entangled",
+      "fasting": "Fasting",
+      "fatigued": "Fatigued",
+      "grappled": "Grappled",
+      "mounted" : "Mounted"
     }
   },
   "SETTINGS": {

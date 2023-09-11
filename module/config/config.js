@@ -121,3 +121,26 @@ l5r4.stanceEffects = [
     icon: `${iconPath}/void.png`,
   },
 ];
+
+l5r4.statusConditions = [
+  {
+    id: "dazed",
+    name: "l5r4.conditions.dazed",
+    icon: "icons/daze.svg",
+  },
+  {
+    id: "fasting",
+    name: "l5r4.conditions.fasting",
+    icon: "icons/ruin.svg",
+  },
+  {
+    id: "fatigue",
+    name: "l5r4.conditions.fatigue",
+    icon: "icons/downgrade.svg",
+  },
+  {
+    id: "grappled",
+    name: "l5r4.conditions.grappled",
+    icon: "icons/restrained.svg",
+  },
+];
