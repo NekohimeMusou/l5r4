@@ -122,6 +122,7 @@ l5r4.stanceEffects = [
   },
 ];
 
+// Status conditions changed/not in Foundry set
 l5r4.statusConditions = [
   {
     id: "dazed",
@@ -129,18 +130,48 @@ l5r4.statusConditions = [
     icon: "icons/daze.svg",
   },
   {
+    id: "entangled",
+    name: "l5r4.conditions.entangled",
+    icon: "icons/net.svg",
+  },
+  {
     id: "fasting",
     name: "l5r4.conditions.fasting",
-    icon: "icons/ruin.svg",
+    icon: "icons/tankard.svg",
   },
   {
     id: "fatigue",
     name: "l5r4.conditions.fatigue",
-    icon: "icons/downgrade.svg",
+    icon: "icons/degen.svg",
   },
   {
     id: "grappled",
     name: "l5r4.conditions.grappled",
-    icon: "icons/restrained.svg",
+    icon: "icons/trap.svg",
+  },
+  {
+    id: "stunned",
+    name: "l5r4.conditions.stunned",
+    icon: "icons/sun.svg",
+  },
+  {
+    id: "mounted",
+    name: "l5r4.conditions.mounted",
+    icon: "icons/upgrade.svg",
+  },
+  {
+    id: "crippled",
+    name: "l5r4.conditions.crippled",
+    icon: "icons/bones.svg",
+  },
+  {
+    id: "down",
+    name: "l5r4.conditions.down",
+    icon: "icons/downgrade.svg",
+  },
+  {
+    id: "out",
+    name: "l5r4.conditions.out",
+    icon: "icons/unconscious.svg",
   },
 ];

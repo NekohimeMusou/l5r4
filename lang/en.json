@@ -221,7 +221,11 @@
       "fasting": "Fasting",
       "fatigued": "Fatigued",
       "grappled": "Grappled",
-      "mounted" : "Mounted"
+      "mounted": "Mounted/Higher",
+      "stunned": "Stunned",
+      "crippled": "Crippled",
+      "down": "Down",
+      "out": "Out"
     }
   },
   "SETTINGS": {

@@ -16,8 +16,6 @@ Hooks.once("init", function() {
   CONFIG.l5r4 = l5r4;
   CONFIG.Item.documentClass = L5R4Item;
   CONFIG.Actor.documentClass = L5R4Actor;
-  // Put the stance effects at the top of the list
-  CONFIG.statusEffects = l5r4.stanceEffects.concat(CONFIG.statusEffects);
 
   // custom initiative
   Combatant.prototype._getInitiativeFormula = function() {
@@ -45,9 +43,18 @@ Hooks.once("init", function() {
   registerHandlebarsHelpers();
   registerSystemSettings();
   initializeActiveEffects();
+  initializeStatusConditions();
 });
 
 function handleLegacyBehavior() {
   // Disable legacy active effect transferral
   CONFIG.ActiveEffect.legacyTransferral = false;
+}
+
+function initializeStatusConditions() {
+  // const l5r4Conditions = CONFIG.l5r4.statusConditions;
+  // Remove any default statuses that share an id or icon with ours
+
+  // Put the stance effects at the top of the list (pre-sort)
+  CONFIG.statusEffects = l5r4.stanceEffects.concat(CONFIG.statusEffects);
 }
