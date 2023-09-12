@@ -43,7 +43,7 @@ Hooks.once("init", function() {
   registerHandlebarsHelpers();
   registerSystemSettings();
   initializeActiveEffects();
-  initializeStatusConditions();
+  initializeStatusEffects();
 });
 
 function handleLegacyBehavior() {
@@ -51,10 +51,17 @@ function handleLegacyBehavior() {
   CONFIG.ActiveEffect.legacyTransferral = false;
 }
 
-function initializeStatusConditions() {
-  // const l5r4Conditions = CONFIG.l5r4.statusConditions;
-  // Remove any default statuses that share an id or icon with ours
+function initializeStatusEffects() {
+  const l5r4Conditions = CONFIG.l5r4.statusConditions;
 
-  // Put the stance effects at the top of the list (pre-sort)
-  CONFIG.statusEffects = l5r4.stanceEffects.concat(CONFIG.statusEffects);
+  // Remove any default statuses that share an id or icon with ours
+  const statusEffects = CONFIG.statusEffects.filter(
+      (s) => !l5r4Conditions.some(
+          (c) => c.icon === s.icon) && !l5r4Conditions.some((c) => c.id === s.id),
+  );
+
+  // Add L5R4 conditions and stance effects
+  CONFIG.statusEffects = l5r4.stanceEffects
+      .concat(l5r4Conditions)
+      .concat(statusEffects);
 }
