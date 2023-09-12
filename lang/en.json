@@ -209,11 +209,11 @@
       "spiritual": "Spriritual"
     },
     "stances": {
-      "attack": "Stance: Attack",
-      "fullAttack": "Stance: Full Attack",
-      "defense": "Stance: Defense",
-      "fullDefense": "Stance: Full Defense",
-      "center": "Stance: Center"
+      "attack": "!Stance: Attack",
+      "fullAttack": "!Stance: Full Attack",
+      "defense": "!Stance: Defense",
+      "fullDefense": "!Stance: Full Defense",
+      "center": "!Stance: Center"
     },
     "conditions": {
       "dazed": "Dazed",
