@@ -56,6 +56,8 @@ export default class L5R4Item extends Item {
   prepareData() {
     super.prepareData();
 
+    this.fixEquipTypo();
+
     const itemData = this;
     const l5r4Data = itemData.system;
 
@@ -98,6 +100,14 @@ export default class L5R4Item extends Item {
       l5r4Data.damageRoll = Math.min(parseInt(l5r4Data.str), actorStr) + arrowRoll;
       l5r4Data.damageKeep = arrowKeep;
       l5r4Data.damageFormula = `${l5r4Data.damageRoll}k${l5r4Data.damageKeep}`;
+    }
+  }
+
+  async fixEquipTypo() {
+    const systemData = this.system;
+
+    if (Object.hasOwn(systemData, "equiped")) {
+      await this.update({"system.equipped": false, "system.-=equiped": null});
     }
   }
 
