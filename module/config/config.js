@@ -127,51 +127,51 @@ l5r4.statusConditions = [
   {
     id: "dazed",
     name: "l5r4.conditions.dazed",
-    icon: "icons/daze.svg",
+    icon: "icons/svg/daze.svg",
   },
   {
     id: "entangled",
     name: "l5r4.conditions.entangled",
-    icon: "icons/net.svg",
+    icon: "icons/svg/net.svg",
   },
   {
     id: "fasting",
     name: "l5r4.conditions.fasting",
-    icon: "icons/tankard.svg",
+    icon: "icons/svg/tankard.svg",
   },
   {
     id: "fatigue",
     name: "l5r4.conditions.fatigue",
-    icon: "icons/degen.svg",
+    icon: "icons/svg/degen.svg",
   },
   {
     id: "grappled",
     name: "l5r4.conditions.grappled",
-    icon: "icons/trap.svg",
+    icon: "icons/svg/trap.svg",
   },
   {
-    id: "stunned",
+    id: "stun",
     name: "l5r4.conditions.stunned",
-    icon: "icons/sun.svg",
+    icon: "icons/svg/sun.svg",
   },
   {
     id: "mounted",
     name: "l5r4.conditions.mounted",
-    icon: "icons/upgrade.svg",
+    icon: "icons/svg/upgrade.svg",
   },
   {
     id: "crippled",
     name: "l5r4.conditions.crippled",
-    icon: "icons/bones.svg",
+    icon: "icons/svg/bones.svg",
   },
   {
     id: "down",
     name: "l5r4.conditions.down",
-    icon: "icons/downgrade.svg",
+    icon: "icons/svg/downgrade.svg",
   },
   {
     id: "out",
     name: "l5r4.conditions.out",
-    icon: "icons/unconscious.svg",
+    icon: "icons/svg/unconscious.svg",
   },
 ];
