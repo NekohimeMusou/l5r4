@@ -97,12 +97,16 @@ export default class L5R4Actor extends Actor {
     armors.forEach((armor) => {
       armorData = armor.getRollData();
       if (armorData.equipped) {
+        /* FIXTHIS: Put back when active effects are in
         if (parseInt(armorData.bonus) > armorBonus) {
           armorBonus = parseInt(armorData.bonus);
         }
         if (parseInt(armorData.reduction) > armorReduction) {
           armorReduction = parseInt(armorData.reduction);
         }
+         */
+        armorBonus += parseInt(armorData.bonus) || 0;
+        armorReduction += parseInt(armorData.reduction) || 0;
       }
     });
     l5r4Data.armor_tn.bonus = armorBonus;
