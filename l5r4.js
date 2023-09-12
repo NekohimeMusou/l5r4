@@ -53,6 +53,11 @@ function handleLegacyBehavior() {
 
 function initializeStatusEffects() {
   const l5r4Conditions = CONFIG.l5r4.statusConditions;
+  const l5r4Stances = CONFIG.l5r4.stanceEffects;
+
+  if (game.settings.get("l5r4", "addBangToStance")) {
+    l5r4Stances.forEach((s) => s.name = `${s.name}Bang`);
+  }
 
   // Remove any default statuses that share an id or icon with ours
   const statusEffects = CONFIG.statusEffects.filter(
@@ -61,7 +66,7 @@ function initializeStatusEffects() {
   );
 
   // Add L5R4 conditions and stance effects
-  CONFIG.statusEffects = l5r4.stanceEffects
+  CONFIG.statusEffects = l5r4Stances
       .concat(l5r4Conditions)
       .concat(statusEffects);
 }

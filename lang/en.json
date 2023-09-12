@@ -209,11 +209,16 @@
       "spiritual": "Spriritual"
     },
     "stances": {
-      "attack": "!Stance: Attack",
-      "fullAttack": "!Stance: Full Attack",
-      "defense": "!Stance: Defense",
-      "fullDefense": "!Stance: Full Defense",
-      "center": "!Stance: Center"
+      "attack": "Stance: Attack",
+      "fullAttack": "Stance: Full Attack",
+      "defense": "Stance: Defense",
+      "fullDefense": "Stance: Full Defense",
+      "center": "Stance: Center",
+      "attackBang": "!Stance: Attack",
+      "fullAttackBang": "!Stance: Full Attack",
+      "defenseBang": "!Stance: Defense",
+      "fullDefenseBang": "!Stance: Full Defense",
+      "centerBang": "!Stance: Center"
     },
     "conditions": {
       "dazed": "Dazed",
@@ -248,6 +253,10 @@
     "useLtTenDiceRule": {
       "name": "Use the modified Ten Dice Rule from Little Truths.",
       "label": "If there are an odd number of excess rolled dice and fewer than 10 kept dice, add +2 to the roll total so the \"extra\" die gives a benefit."
+    },
+    "addBangToStance": {
+      "name": "Add a ! to the beginning of stance names.",
+      "label": "Just a little hack to make stances play nicer with mods that alphabetize status effects."
     }
   }
 }

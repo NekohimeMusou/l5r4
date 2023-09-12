@@ -39,4 +39,13 @@ export default function registerSystemSettings() {
     type: Boolean,
     default: false,
   });
+  game.settings.register("l5r4", "addBangToStance", {
+    config: true,
+    scope: "world",
+    name: "SETTINGS.addBangToStance.name",
+    hint: "SETTINGS.addBangToStance.label",
+    type: Boolean,
+    default: false,
+    requiresReload: true,
+  });
 }
