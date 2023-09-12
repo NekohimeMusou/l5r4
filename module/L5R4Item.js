@@ -56,7 +56,7 @@ export default class L5R4Item extends Item {
   prepareData() {
     super.prepareData();
 
-    this.fixEquipTypo();
+    this.fixTemplateTypos();
 
     const itemData = this;
     const l5r4Data = itemData.system;
@@ -103,11 +103,21 @@ export default class L5R4Item extends Item {
     }
   }
 
-  async fixEquipTypo() {
+  async fixTemplateTypos() {
     const systemData = this.system;
 
     if (Object.hasOwn(systemData, "equiped")) {
-      await this.update({"system.equipped": false, "system.-=equiped": null});
+      await this.update({
+        "system.equipped": false,
+        "system.-=equiped": null,
+      });
+    }
+
+    if (Object.hasOwn(systemData, "specialRues")) {
+      await this.update({
+        "system.specialRules": systemData.specialRues,
+        "system.-=specialRues": null,
+      });
     }
   }
 
