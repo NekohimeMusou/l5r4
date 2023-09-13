@@ -90,3 +90,8 @@ export function prepareActiveEffectCategories(effects) {
   }
   return categories;
 }
+
+// export async function showActiveEffectDialog(effects) {
+//   const templatePath = "systems/l5r4/templates/chat/active-effect-dialog.hbs";
+//   const content = await renderTemplate(templatePath, {effects});
+// }

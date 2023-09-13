@@ -162,6 +162,13 @@
       "spellSlots": "Spell slots",
       "manageActiveEffects": "Manage Active Effects"
     },
+    "effects": {
+      "create": "Create Effect",
+      "toggle": "Toggle Effect",
+      "edit": "Edit Effect",
+      "delete": "Delete Effect",
+      "add": "Add"
+    },
     "skillTypes": {
       "high": "High",
       "bugei": "Bugei",

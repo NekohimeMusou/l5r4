@@ -21,10 +21,8 @@ export default class L5R4ItemSheet extends ItemSheet {
       item: baseData.item,
       data: baseData.item.system,
       config: CONFIG.l5r4,
+      effects: prepareActiveEffectCategories(this.item.effects),
     };
-
-    // Prepare active effects
-    sheetData.effects = prepareActiveEffectCategories(this.item.effects);
 
     return sheetData;
   }
