@@ -1,5 +1,6 @@
 import * as Dice from "../dice.js";
 import * as Chat from "../chat.js";
+import {prepareActiveEffectCategories} from "../config/active-effects.js";
 
 export default class L5R4NpcSheet extends ActorSheet {
   static get defaultOptions() {
@@ -33,6 +34,9 @@ export default class L5R4NpcSheet extends ActorSheet {
     baseData.skills = baseData.items.filter(function(item) {
       return item.type == "skill";
     });
+
+    // Prepare active effects
+    baseData.effects = prepareActiveEffectCategories(this.actor.effects);
 
     return baseData;
   }

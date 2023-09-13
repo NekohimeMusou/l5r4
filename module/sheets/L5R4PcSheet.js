@@ -1,5 +1,6 @@
 import * as Dice from "../dice.js";
 import * as Chat from "../chat.js";
+import {prepareActiveEffectCategories} from "../config/active-effects.js";
 
 export default class L5R4PcSheet extends ActorSheet {
   static get defaultOptions() {
@@ -102,6 +103,9 @@ export default class L5R4PcSheet extends ActorSheet {
         baseData.masteries.push({_id: skill._id, name: `${skill.name} 7`, mastery: skill.system.mastery_7});
       }
     }
+
+    // Prepare active effects
+    baseData.effects = prepareActiveEffectCategories(this.actor.effects);
 
     return baseData;
   }

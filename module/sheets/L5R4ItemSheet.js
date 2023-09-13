@@ -1,3 +1,5 @@
+import {prepareActiveEffectCategories} from "../config/active-effects";
+
 export default class L5R4ItemSheet extends ItemSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
@@ -20,6 +22,9 @@ export default class L5R4ItemSheet extends ItemSheet {
       data: baseData.item.system,
       config: CONFIG.l5r4,
     };
+
+    // Prepare active effects
+    sheetData.effects = prepareActiveEffectCategories(this.item.effects);
 
     return sheetData;
   }
