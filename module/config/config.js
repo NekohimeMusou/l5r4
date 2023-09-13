@@ -140,8 +140,8 @@ l5r4.statusConditions = [
     icon: "icons/svg/tankard.svg",
   },
   {
-    id: "fatigue",
-    name: "l5r4.conditions.fatigue",
+    id: "fatigued",
+    name: "l5r4.conditions.fatigued",
     icon: "icons/svg/degen.svg",
   },
   {
