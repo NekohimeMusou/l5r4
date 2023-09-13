@@ -1,4 +1,4 @@
-import {prepareActiveEffectCategories} from "../config/active-effects";
+import {prepareActiveEffectCategories} from "../config/active-effects.js";
 
 export default class L5R4ItemSheet extends ItemSheet {
   static get defaultOptions() {

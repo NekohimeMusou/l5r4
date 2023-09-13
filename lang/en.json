@@ -159,7 +159,8 @@
       "rulesSummary": "Rules Summary",
       "description": "Description",
       "nrWoundLvls": "Number of Wound levels",
-      "spellSlots": "Spell slots"
+      "spellSlots": "Spell slots",
+      "manageActiveEffects": "Manage Active Effects"
     },
     "skillTypes": {
       "high": "High",
