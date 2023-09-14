@@ -163,11 +163,14 @@
       "manageActiveEffects": "Manage Active Effects"
     },
     "effects": {
+      "activeEffects": "Active Effects",
       "create": "Create Effect",
       "toggle": "Toggle Effect",
       "edit": "Edit Effect",
       "delete": "Delete Effect",
-      "add": "Add"
+      "add": "Add",
+      "source": "Source",
+      "duration": "Duration"
     },
     "skillTypes": {
       "high": "High",

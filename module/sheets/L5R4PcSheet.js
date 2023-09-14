@@ -1,6 +1,6 @@
 import * as Dice from "../dice.js";
 import * as Chat from "../chat.js";
-import {prepareActiveEffectCategories} from "../config/active-effects.js";
+import {prepareActiveEffectCategories, showActiveEffectDialog} from "../config/active-effects.js";
 
 export default class L5R4PcSheet extends ActorSheet {
   static get defaultOptions() {
@@ -114,29 +114,31 @@ export default class L5R4PcSheet extends ActorSheet {
     // TEMPLATE: html.find(cssSelector).event(this._someCallBack.bind(this));
 
     // only owners should edit and add things
-    if (this.actor.isOwner) {
-      html.find(".item-create").click(this._onItemCreate.bind(this));
-      html.find(".item-edit").click(this._onItemEdit.bind(this));
-      html.find(".item-delete").click(this._onItemDelete.bind(this));
-      html.find(".inline-edit").change(this._onInlineItemEdit.bind(this));
+    if (!this.actor.isOwner) return;
 
-      new ContextMenu(html, ".skill-item", this.itemContextMenu);
-      new ContextMenu(html, ".commonItem-card", this.itemContextMenu);
-      new ContextMenu(html, ".armor-card", this.itemContextMenu);
-      new ContextMenu(html, ".weapon-card", this.itemContextMenu);
-      new ContextMenu(html, ".spell-card", this.itemContextMenu);
-      new ContextMenu(html, ".technique-card", this.itemContextMenu);
-      new ContextMenu(html, ".advantage-card", this.itemContextMenu);
-      new ContextMenu(html, ".disadvantage-card", this.itemContextMenu);
-      new ContextMenu(html, ".kata-card", this.itemContextMenu);
-      new ContextMenu(html, ".kiho-card", this.itemContextMenu);
+    html.find(".item-create").click(this._onItemCreate.bind(this));
+    html.find(".item-edit").click(this._onItemEdit.bind(this));
+    html.find(".item-delete").click(this._onItemDelete.bind(this));
+    html.find(".inline-edit").change(this._onInlineItemEdit.bind(this));
 
-      html.find(".item-roll").click(this._onItemRoll.bind(this));
-      html.find(".weapon-roll").click(this._onWeaponRoll.bind(this));
-      html.find(".skill-roll").click(this._onSkillRoll.bind(this));
-      html.find(".ring-roll").click(this._onRingRoll.bind(this));
-      html.find(".trait-roll").click(this._onTraitRoll.bind(this));
-    }
+    new ContextMenu(html, ".skill-item", this.itemContextMenu);
+    new ContextMenu(html, ".commonItem-card", this.itemContextMenu);
+    new ContextMenu(html, ".armor-card", this.itemContextMenu);
+    new ContextMenu(html, ".weapon-card", this.itemContextMenu);
+    new ContextMenu(html, ".spell-card", this.itemContextMenu);
+    new ContextMenu(html, ".technique-card", this.itemContextMenu);
+    new ContextMenu(html, ".advantage-card", this.itemContextMenu);
+    new ContextMenu(html, ".disadvantage-card", this.itemContextMenu);
+    new ContextMenu(html, ".kata-card", this.itemContextMenu);
+    new ContextMenu(html, ".kiho-card", this.itemContextMenu);
+
+    html.find(".item-roll").click(this._onItemRoll.bind(this));
+    html.find(".weapon-roll").click(this._onWeaponRoll.bind(this));
+    html.find(".skill-roll").click(this._onSkillRoll.bind(this));
+    html.find(".ring-roll").click(this._onRingRoll.bind(this));
+    html.find(".trait-roll").click(this._onTraitRoll.bind(this));
+
+    html.find(".show-effects-dialog").click(this._onActiveEffectDialog.bind(this));
 
     super.activateListeners(html);
   }
@@ -319,5 +321,11 @@ export default class L5R4PcSheet extends ActorSheet {
     }
 
     return await item.update({[field]: element.value});
+  }
+
+  async _onActiveEffectDialog(event) {
+    const effects = prepareActiveEffectCategories(this.actor.effects);
+
+    return await showActiveEffectDialog(effects);
   }
 }

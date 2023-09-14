@@ -91,7 +91,21 @@ export function prepareActiveEffectCategories(effects) {
   return categories;
 }
 
-// export async function showActiveEffectDialog(effects) {
-//   const templatePath = "systems/l5r4/templates/chat/active-effect-dialog.hbs";
-//   const content = await renderTemplate(templatePath, {effects});
-// }
+export async function showActiveEffectDialog(effects) {
+  const templatePath = "systems/l5r4/templates/chat/active-effect-dialog.hbs";
+  const content = await renderTemplate(templatePath, {effects});
+
+  return new Promise((resolve) => {
+    new Dialog({
+      title: game.i18n.localize("l5r4.effects.activeEffects"),
+      content,
+      buttons: {
+        close: {
+          label: "Close",
+          callback: (html) => resolve(null),
+        },
+      },
+      close: () => resolve(null),
+    }).render(true);
+  });
+}
