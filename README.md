@@ -17,6 +17,10 @@ Forked from <https://gitlab.com/team-l5r4/l5r4>. The system hasn't been updated 
 - Automatically calculates the current wound level based on the wounds suffered.
 - A simplified sheet for npcs with rollable attacks, skills and damage.
 
+## Active Effects
+
+Active effects are in for PCs (so far). You can find the available data paths in data-paths.txt in the system folder. Beware: armor.armor_tn and armor.reduction are fake, you have to use armor_tn.current and armor_tn.reduction instead.
+
 ## Available languages
 
 - English

@@ -1,5 +1,6 @@
 import * as Dice from "../dice.js";
 import * as Chat from "../chat.js";
+import {prepareActiveEffectCategories, onManageActiveEffect} from "../config/active-effects.js";
 
 export default class L5R4PcSheet extends ActorSheet {
   static get defaultOptions() {
@@ -7,6 +8,7 @@ export default class L5R4PcSheet extends ActorSheet {
       template: "systems/l5r4/templates/sheets/pc-sheet.hbs",
       classes: ["l5r4", "pc"],
       width: 879,
+      tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "main"}],
     });
   }
 
@@ -103,6 +105,9 @@ export default class L5R4PcSheet extends ActorSheet {
       }
     }
 
+    // Prepare active effects
+    baseData.effects = prepareActiveEffectCategories(this.actor.effects);
+
     return baseData;
   }
 
@@ -132,6 +137,9 @@ export default class L5R4PcSheet extends ActorSheet {
       html.find(".skill-roll").click(this._onSkillRoll.bind(this));
       html.find(".ring-roll").click(this._onRingRoll.bind(this));
       html.find(".trait-roll").click(this._onTraitRoll.bind(this));
+
+      // Active Effect management
+      html.find(".effect-control").click((ev) => onManageActiveEffect(ev, this.actor));
     }
 
     super.activateListeners(html);

@@ -26,6 +26,8 @@ export default async function preloadHandlebarsTemplates() {
     "systems/l5r4/templates/chat/simple-roll.hbs",
     "systems/l5r4/templates/chat/weapon-chat.hbs",
     "templates/dice/roll.html",
+    "systems/l5r4/templates/partials/tabs/active-effects.hbs",
+    "systems/l5r4/templates/partials/tabs/main.hbs",
   ];
 
   return loadTemplates(templatePaths);

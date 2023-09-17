@@ -231,6 +231,17 @@
       "crippled": "Crippled",
       "down": "Down",
       "out": "Out"
+    },
+    "effects": {
+      "create": "Create Effect",
+      "add": "Add",
+      "toggle": "Toggle Effect",
+      "edit": "Edit Effect",
+      "delete": "Delete Effect"
+    },
+    "tabs": {
+      "main": "Main",
+      "effects": "Effects"
     }
   },
   "SETTINGS": {
