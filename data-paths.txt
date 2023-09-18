@@ -42,8 +42,6 @@ system.wound_lvl.down.current
 system.wound_lvl.out.value
 system.wound_lvl.out.penalty
 system.wound_lvl.out.current
-system.armor.armor_tn
-system.armor.reduction
 system.notes
 system.xp
 system.clan
