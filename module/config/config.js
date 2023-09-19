@@ -1,5 +1,7 @@
 export const l5r4 = {};
 
+l5r4.SYSTEM_ID = "l5r4";
+
 l5r4.arrows = {
   armor: "l5r4.arrows.armor",
   flesh: "l5r4.arrows.flesh",

@@ -73,7 +73,9 @@ export async function ringRoll({
   ringName = null,
   systemRing = null,
   schoolRank = null,
-  askForOptions = true} = {}) {
+  askForOptions = true,
+  // FIXTHIS: Use active effects for the Spellcraft bonus
+  spellcraftBonus = 0} = {}) {
   const messageTemplate = "systems/l5r4/templates/chat/simple-roll.hbs";
   let rollType = game.i18n.localize("l5r4.mech.ringRoll");
   let label = `${rollType}: ${ringName}`;
@@ -150,7 +152,8 @@ export async function ringRoll({
     if (schoolRank <= 0) {
       return ui.notifications.error(game.i18n.localize("l5r4.errors.schoolRankZero"));
     }
-    const diceToRoll = parseInt(ringRank) + parseInt(schoolRank) + parseInt(rollMod);
+    // FIXTHIS: Use active effects for the Spellcraft bonus
+    const diceToRoll = parseInt(ringRank) + parseInt(schoolRank) + parseInt(rollMod) + spellcraftBonus;
     const diceToKeep = parseInt(ringRank) + parseInt(keepMod);
     const {diceRoll, diceKeep, bonus} = tenDiceRule(diceToRoll, diceToKeep, totalMod);
     const rollFormula = `${diceRoll}d10k${diceKeep}x10+${bonus}`;

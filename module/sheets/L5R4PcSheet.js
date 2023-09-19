@@ -142,6 +142,12 @@ export default class L5R4PcSheet extends ActorSheet {
     const ringName = event.currentTarget.dataset.ringName;
     const systemRing = event.currentTarget.dataset.systemRing;
     const schoolRank = this.actor.system.insight.rank;
+
+    // FIXTHIS: Use active effects for the Spellcraft bonus
+    const spellcraft = this.actor.items.find(
+        (i) => i.type === "skill" && i.name.toLowerCase() === "spellcraft",
+    )?.system?.rank || 0;
+
     let spell = false;
 
     spell = await Dice.ringRoll(
@@ -152,6 +158,8 @@ export default class L5R4PcSheet extends ActorSheet {
           systemRing: systemRing,
           schoolRank: schoolRank,
           askForOptions: event.shiftKey,
+          // FIXTHIS: Use active effects for the Spellcraft bonus
+          spellcraftBonus: Number(spellcraft >= 5),
         },
     );
     if (spell.voidSlot) {
