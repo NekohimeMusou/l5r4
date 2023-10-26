@@ -7,10 +7,6 @@ export default class L5R4Actor extends Actor {
       this.prototypeToken.updateSource(
           {
             bar1: {"attribute": "wounds"},
-            bar2: {"attribute": "suffered"},
-            displayName: CONST.TOKEN_DISPLAY_MODES.ALWAYS,
-            displayBars: CONST.TOKEN_DISPLAY_MODES.OWNER,
-            disposition: CONST.TOKEN_DISPOSITIONS.FRIENDLY,
             name: this.name,
             vision: true,
             actorLink: true,
@@ -21,11 +17,8 @@ export default class L5R4Actor extends Actor {
       this.prototypeToken.updateSource(
           {
             bar1: {"attribute": "wounds"},
-            bar2: {"attribute": "suffered"},
-            displayName: CONST.TOKEN_DISPLAY_MODES.OWNER,
-            displayBars: CONST.TOKEN_DISPLAY_MODES.OWNER,
-            disposition: CONST.TOKEN_DISPOSITIONS.HOSTILE,
             name: this.name,
+            vision: true,
           });
       this.updateSource({img: "systems/l5r4/assets/icons/ninja.png"});
     }
