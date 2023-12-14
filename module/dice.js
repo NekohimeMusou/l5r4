@@ -6,7 +6,8 @@ export async function skillRoll({
   askForOptions = true,
   npc = false,
   skillTrait = null,
-  inFAStance = false} = {}) {
+  inFAStance = false,
+  actor=null} = {}) {
   const messageTemplate = "systems/l5r4/templates/chat/simple-roll.hbs";
 
   const traitString = skillTrait === "void" ? "l5r4.rings.void" : `l5r4.traits.${skillTrait}`;
@@ -61,7 +62,7 @@ export async function skillRoll({
   });
 
   const messageData = {
-    speaker: ChatMessage.getSpeaker(),
+    speaker: ChatMessage.getSpeaker({actor}),
     content: renderedRoll,
   };
   rollResult.toMessage(messageData);
@@ -75,7 +76,8 @@ export async function ringRoll({
   schoolRank = null,
   askForOptions = true,
   // FIXTHIS: Use active effects for the Spellcraft bonus
-  spellcraftBonus = 0} = {}) {
+  spellcraftBonus = 0,
+  actor=null} = {}) {
   const messageTemplate = "systems/l5r4/templates/chat/simple-roll.hbs";
   let rollType = game.i18n.localize("l5r4.mech.ringRoll");
   let label = `${rollType}: ${ringName}`;
@@ -133,7 +135,7 @@ export async function ringRoll({
     });
 
     const messageData = {
-      speaker: ChatMessage.getSpeaker(),
+      speaker: ChatMessage.getSpeaker({actor}),
       content: renderedRoll,
     };
     rollResult.toMessage(messageData);
@@ -165,7 +167,7 @@ export async function ringRoll({
     });
 
     const messageData = {
-      speaker: ChatMessage.getSpeaker(),
+      speaker: ChatMessage.getSpeaker({actor}),
       content: renderedRoll,
     };
     rollResult.toMessage(messageData);
@@ -179,7 +181,8 @@ export async function traitRoll({
   traitRank = null,
   traitName = null,
   askForOptions = true,
-  unskilled = false} = {}) {
+  unskilled = false,
+  actor=null} = {}) {
   const messageTemplate = "systems/l5r4/templates/chat/simple-roll.hbs";
   const rollType = game.i18n.localize("l5r4.mech.traitRoll");
   let label = `${rollType}: ${traitName}`;
@@ -231,7 +234,7 @@ export async function traitRoll({
   });
 
   const messageData = {
-    speaker: ChatMessage.getSpeaker(),
+    speaker: ChatMessage.getSpeaker({actor}),
     content: renderedRoll,
   };
 
@@ -382,7 +385,8 @@ export async function weaponRoll({
   diceKeep = null,
   weaponName = null,
   description = null,
-  askForOptions = true} = {}) {
+  askForOptions = true,
+  actor=null} = {}) {
   const messageTemplate = "systems/l5r4/templates/chat/weapon-chat.hbs";
 
   const optionsSettings = game.settings.get("l5r4", "showSkillRollOptions");
@@ -430,7 +434,7 @@ export async function weaponRoll({
 
   const chatData = {
     user: game.user.id,
-    speaker: ChatMessage.getSpeaker(),
+    speaker: ChatMessage.getSpeaker({actor}),
     roll: rollResult,
     content: await renderTemplate(messageTemplate, templateContext),
     sound: CONFIG.sounds.dice,
@@ -483,7 +487,8 @@ export async function npcRoll({
   rollName = null,
   description = null,
   toggleOptions = true,
-  rollType = null} = {}) {
+  rollType = null,
+  actor=null} = {}) {
   let label = `${rollName}`;
   let bonus = 0;
 
@@ -526,7 +531,7 @@ export async function npcRoll({
 
   const messageData = {
     flavor: label,
-    speaker: ChatMessage.getSpeaker(),
+    speaker: ChatMessage.getSpeaker({actor}),
   };
 
   return await new Roll(rollFormula).roll({async: true}).toMessage(messageData);

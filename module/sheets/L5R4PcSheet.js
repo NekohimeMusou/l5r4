@@ -160,6 +160,7 @@ export default class L5R4PcSheet extends ActorSheet {
           askForOptions: event.shiftKey,
           // FIXTHIS: Use active effects for the Spellcraft bonus
           spellcraftBonus: Number(spellcraft >= 5),
+          actor: this.actor,
         },
     );
     if (spell.voidSlot) {
@@ -190,6 +191,7 @@ export default class L5R4PcSheet extends ActorSheet {
           traitRank: traitRank,
           traitName: traitName,
           askForOptions: event.shiftKey,
+          actor: this.actor,
         },
     );
   }
@@ -222,6 +224,7 @@ export default class L5R4PcSheet extends ActorSheet {
           weaponName: weaponName,
           description: rollData.description,
           askForOptions: event.shiftKey,
+          actor: this.actor,
         },
     );
   }
@@ -248,6 +251,7 @@ export default class L5R4PcSheet extends ActorSheet {
       askForOptions: event.shiftKey,
       skillTrait,
       inFAStance: this.actor.system.inFAStance,
+      actor: this.actor,
     });
   }
 

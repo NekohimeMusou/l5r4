@@ -90,6 +90,7 @@ export default class L5R4NpcSheet extends ActorSheet {
           rollName,
           toggleOptions,
           rollType,
+          actor: this.actor,
         },
     );
   }
@@ -112,6 +113,7 @@ export default class L5R4NpcSheet extends ActorSheet {
           description,
           toggleOptions,
           rollType,
+          actor: this.actor,
         },
     );
   }
@@ -132,6 +134,7 @@ export default class L5R4NpcSheet extends ActorSheet {
           description,
           toggleOptions,
           rollType,
+          actor: this.actor,
         },
     );
   }
@@ -223,6 +226,7 @@ export default class L5R4NpcSheet extends ActorSheet {
       askForOptions: event.shiftKey,
       npc: true,
       skillTrait,
+      actor: this.actor,
     });
   }
 }
